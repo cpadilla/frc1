@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: efd915ed56a893f42ac0e153e82c4ef1
+guid: d86ab14a9668c044fa8107b4be97f2da
 TextureImporter:
   serializedVersion: 2
   mipmaps:
@@ -41,40 +41,49 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: projectile1SpriteSheet_0
+    - name: laserSpriteSheet_0
       rect:
         serializedVersion: 2
-        x: 41
-        y: 321
-        width: 19
-        height: 57
+        x: 47
+        y: 400
+        width: 6
+        height: 78
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: projectile1SpriteSheet_1
+    - name: laserSpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 41
-        y: 220
-        width: 19
-        height: 58
+        x: 47
+        y: 300
+        width: 6
+        height: 78
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: projectile1SpriteSheet_2
+    - name: laserSpriteSheet_2
       rect:
         serializedVersion: 2
-        x: 41
-        y: 121
-        width: 19
-        height: 57
+        x: 47
+        y: 200
+        width: 6
+        height: 78
       alignment: 0
       pivot: {x: 0, y: 0}
-    - name: projectile1SpriteSheet_3
+    - name: laserSpriteSheet_3
       rect:
         serializedVersion: 2
-        x: 41
-        y: 20
-        width: 19
-        height: 58
+        x: 47
+        y: 99
+        width: 6
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+    - name: laserSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 0
+        width: 6
+        height: 78
       alignment: 0
       pivot: {x: 0, y: 0}
   spritePackingTag: 
