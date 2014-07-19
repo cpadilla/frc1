@@ -23,7 +23,7 @@ public class WorldRenderer : MonoBehaviour {
         // spawn timer
         private float spawnTimer = 0.0f;
         private float spawnRate = 100.0f;
-        private float spawnInterval = 100.0f;
+        private float spawnInterval = 10.0f;
 
         // Prefab Offsets
         private float largePlanetOffset = 100.0f;
@@ -35,7 +35,7 @@ public class WorldRenderer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-            spawnTimer += Time.deltaTime * spawnRate;
+            spawnTimer += spawnRate;
             // if it's time to respawn
             SpawnObjects();
             DelteFarObjects();
@@ -52,11 +52,12 @@ public class WorldRenderer : MonoBehaviour {
         void SpawnObjects()
         {
             // if it's time to spawn objects and there is a need for objects
-            if (spawnTimer > Time.deltaTime * spawnInterval && backgroundObjects.Count <= maxObjectCount)
+            if (spawnTimer > spawnInterval && backgroundObjects.Count <= maxObjectCount)
             {
                 GameObject obj = getNextSpawnObject();
                 if (obj.GetComponent("Enemy") != null) foregroundObjects.Add(obj);
                 else backgroundObjects.Add(obj);
+                spawnTimer = 0;
             }
         }
 
