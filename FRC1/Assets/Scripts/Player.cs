@@ -16,6 +16,13 @@ public class Player : MonoBehaviour
         public float v_Input = 0f;
         public float h_Input = 0f;
 
+	//Score
+	public int m_score=0;
+
+	public GUIStyle scoreStyle;
+
+	public Rect m_scoreRect;
+
         // Use this for initialization
         void Awake()
         {
@@ -23,6 +30,20 @@ public class Player : MonoBehaviour
         }
         // Use this for initialization
         
+	void Start()
+	{
+		string text= m_score.ToString();
+		
+		int widthTextOffset= text.Length;
+		
+		
+		m_scoreRect.x=Screen.width/4;
+		m_scoreRect.y=Screen.height*3/4;
+		
+		m_scoreRect.width = m_scoreRect.x+100;
+		m_scoreRect.height= m_scoreRect.y +20;
+
+	}
 
         // Update is called once per frame
         void Update()
@@ -60,7 +81,16 @@ public class Player : MonoBehaviour
 				Destroy(other.gameObject);
 			}
 		}
+
+	void OnGUI()
+	{
+	
+		//width,height,Screen.width-width,height+10
+
+		GUI.Label(m_scoreRect,m_score.ToString(),scoreStyle);
 	}
+}
+
 
 
 

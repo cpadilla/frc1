@@ -18,6 +18,10 @@ public class Enemy : Unit {
 
 	bool isReadyToFire = true;
 
+
+	//Score to player
+	public float m_score;
+
 	public static Transform target;
 
 	void Awake()
