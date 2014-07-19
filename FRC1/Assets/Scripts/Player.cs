@@ -5,8 +5,8 @@ public class Player : MonoBehaviour
 	//Class Instance 
 	public static Player Instance;
 	//Variables
-        public float m_speed = 10.00f;
-        public float r_speed = 20.0f;
+        public float m_speed = 10.0f;
+        public float r_speed = 50.0f;
 
         public bool moving = false;
 		
@@ -35,9 +35,20 @@ public class Player : MonoBehaviour
             // translate the input read from player this iteration 
             transform.Rotate(0,0, h_Input * Time.deltaTime * r_speed);
             transform.Translate(0, v_Input * Time.deltaTime * m_speed, 0);
-
+            
+            if(v_Input == 0)
+               	m_speed -= Time.deltaTime * .5f;
+            else
+            	m_speed = 10.0f;
+            
+            if(h_Input == 0)
+            
+            	r_speed -= Time.deltaTime;
+             else
+            	r_speed = 50.0f;
         }
 
+       
 		//transform.Rotate(Input.GetButton("Up"),90.0f);
 		void OnTriggerEnter(Collider other)
 		{

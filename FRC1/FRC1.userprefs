@@ -1,9 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Background.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerShoot.cs">
     <Files>
-      <File FileName="Assets\Scripts\Background.cs" Line="29" Column="44" />
-      <File FileName="Assets\Scripts\Background.cs" Line="29" Column="44" />
+      <File FileName="Assets\Scripts\Player.cs" Line="48" Column="26" />
+      <File FileName="Assets\Scripts\Background.cs" Line="11" Column="1" />
+      <File FileName="Assets\Scripts\Planet Rotation.cs" Line="11" Column="5" />
+      <File FileName="Assets\Scripts\MainCamera.cs" Line="21" Column="1" />
+      <File FileName="Assets\Scripts\PlayerShoot.cs" Line="34" Column="63" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
