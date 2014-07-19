@@ -5,10 +5,12 @@ public class Player : MonoBehaviour
         public float m_speed = 10.00f;
         public float r_speed = 20.0f;
         public bool moving = false;
+        public static Player instance;
 
         // Use this for initialization
         void Start()
         {
+            instance = this;
         }
 
         // Update is called once per frame
