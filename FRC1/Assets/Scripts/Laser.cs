@@ -9,6 +9,8 @@ public class Laser : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		gameObject.name = "Laser";
+		transform.parent = GameObject.Find ("LaserContainer").transform;
 		Destroy( gameObject, m_lifeTime);
 	}
 	
@@ -25,3 +27,12 @@ public class Laser : MonoBehaviour {
 		Destroy (this.gameObject);
 	}
 }
+
+
+//1E 10E
+//2E 3
+//3E 1
+
+//Laser
+//rapidfire
+//burst

@@ -21,12 +21,9 @@ public class Player : MonoBehaviour
         {
         	Instance = this;
         }
-        // Use this for initialization
-        
 
         // Update is called once per frame
         void Update()
-
         {
         	// Store the input from the player
             v_Input = Input.GetAxis("Vertical");
@@ -50,15 +47,29 @@ public class Player : MonoBehaviour
              else
             	r_speed = 50.0f;
         }
-
-       
+	
 		//transform.Rotate(Input.GetButton("Up"),90.0f);
 		void OnTriggerEnter(Collider other)
 		{
-		print (other.name);
-			if (other.name == "EnemyShip") {
-				Destroy(other.gameObject);
+			print (other.name);
+			switch (other.name) {
+				case "EnemyShip":
+					Destroy(other.gameObject);
+				break;
+				case "Laser":
+
+				break;
+				case "Powerup":
+					Powerup collected = other.GetComponent<Powerup>();
+					CollectedPowerup(collected.type);
+					
+				break;
 			}
+		}
+
+		void CollectedPowerup(int type)
+		{
+			
 		}
 	}
 
