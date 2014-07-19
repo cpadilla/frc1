@@ -15,7 +15,10 @@ public class ShipMovement : MonoBehaviour
     void Update()
     {
 		transform.Translate(Input.GetAxis("Horizontal")*Time.deltaTime*m_speed, Input.GetAxis("Vertical")*Time.deltaTime*m_speed, 0);
-    }
+
+		//transform.Rotate(Input.GetButton("Up"),90.0f);
+
+	}
 
 
 }
