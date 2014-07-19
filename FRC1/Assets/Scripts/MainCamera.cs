@@ -5,13 +5,16 @@ public class MainCamera : MonoBehaviour {
 
     public GameObject ship;
 
+    Player player;
+
 	// Use this for initialization
 	void Start () {
-	
+            player = GameObject.Find("Ship").GetComponent<Player>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-            transform.Translate(Input.GetAxis("Horizontal")*Time.deltaTime*Player.m_speed, Input.GetAxis("Vertical")*Time.deltaTime*Player.m_speed, 0);
+            transform.Rotate(0,0,-Input.GetAxis("Horizontal") *Time.deltaTime* player.r_speed);
+            transform.Translate(0, Input.GetAxis("Vertical")*Time.deltaTime*player.m_speed, 0);
 	}
 }
