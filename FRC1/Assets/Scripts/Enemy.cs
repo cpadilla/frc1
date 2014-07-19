@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class Enemy : Unit {
-	
+
+	public GameObject prefabBullet;
+
 	const int STATE_SEARCH = 0;
 	const int STATE_ATTACK = 1;
 
@@ -12,6 +14,8 @@ public class Enemy : Unit {
 	public float m_range = 5f;
 
 	public float rotate_rate = 20;
+
+	bool isReadyToFire = true;
 
 	public static Transform target;
 
@@ -27,7 +31,7 @@ public class Enemy : Unit {
 	float GetDistance()
 	{
 		float val = Mathf.Abs (Vector3.Distance (transform.position, target.position)); 
-		print (val);
+		//print (val);
 		return val;
 	}
 
@@ -40,6 +44,13 @@ public class Enemy : Unit {
 		ChangeState (STATE_ATTACK);
 	}
 
+	IEnumerator CR_FireCooldown()
+	{
+		yield return new WaitForSeconds (m_rof);
+		isReadyToFire = true;
+
+	}
+
 	IEnumerator CR_ATTACK()
 	{
 		float distance;
@@ -48,13 +59,13 @@ public class Enemy : Unit {
 			distance = GetDistance();
 			if(distance <= m_search_distance)	//if within sight distance
 			{
-				if(distance <= m_range) 		//if within attack range
+				if(isReadyToFire && distance <= m_range) 		//if within attack range
 				{
 					Attack();					//attack
-					yield return new WaitForSeconds(m_rof);
 				}
-				else
-					MoveToTarget();				//move closer
+
+
+				MoveToTarget();				//move closer
 			}
 			else 		//outside of sight range, go to Search State
 				break;
@@ -88,18 +99,27 @@ public class Enemy : Unit {
 
 	void MoveToTarget()
 	{
+		//print ("gogogo");
 		Vector3 targetDir = target.position - transform.position;
 		float step = rotate_rate * Time.deltaTime;
 		Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
 		transform.rotation = Quaternion.LookRotation(new Vector3(newDir.x, newDir.y, 0));
 
 		transform.position += transform.forward * m_speed * Time.deltaTime;
+
+		transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 		//transform.postion = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime);
 	}
 
 	void Attack()
 	{
+		isReadyToFire = false;
+		StartCoroutine (CR_FireCooldown ());
+
+		print ("shoot");
 		//instantiate bullet code
+
+		GameObject bullet = (GameObject)Instantiate (prefabBullet, transform.position + transform.forward * 5, transform.rotation);
+		//bullet.GetComponent<Laser>().
 	}
-	
 }
