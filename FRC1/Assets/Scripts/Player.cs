@@ -11,13 +11,14 @@ public class Player : MonoBehaviour
         public bool moving = false;
 		
 		
-		public float v_Input = 0f;
-		public float h_Input = 0f;
+        public float v_Input = 0f;
+        public float h_Input = 0f;
+
         // Use this for initialization
         void Awake()
         {
         	Instance = this;
-       }
+        }
         // Use this for initialization
         
 
