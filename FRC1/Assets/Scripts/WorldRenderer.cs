@@ -14,10 +14,13 @@ public class WorldRenderer : MonoBehaviour {
         public List<GameObject> prefabs;
 
         public float renderRadius = 400.0f;
-        private float updateRate = 1000.0f;
         private float minSpawnDistance = 3.0f;
         private int maxObjectCount = 30;
         private int initObjectCount = 3;
+
+        private float spawnTimer = 0.0f;
+        private float spawnRate = 100.0f;
+        private float spawnInterval = 100.0f;
 
         void Awake()
         {
@@ -33,6 +36,7 @@ public class WorldRenderer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+            spawnTimer += Time.deltaTime * spawnRate;
             // if it's time to respawn
             SpawnObjects();
         }
@@ -48,7 +52,7 @@ public class WorldRenderer : MonoBehaviour {
         void SpawnObjects()
         {
             // if it's time to spawn objects and there is a need for objects
-            if (Time.time > Time.deltaTime * updateRate && backgroundObjects.Count <= maxObjectCount)
+            if (spawnTimer > Time.deltaTime * spawnInterval && backgroundObjects.Count <= maxObjectCount)
             {
                 GameObject obj = getNextSpawnObject();
                 backgroundObjects.Add(obj);
