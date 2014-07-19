@@ -30,9 +30,7 @@ public class PlayerShoot : MonoBehaviour {
 	void Update () 
 	{
 	
-		m_timer += Time.deltaTime;
-
-		if(Input.GetButton("Fire1") && m_timer >= m_fireRate )
+		if(Input.GetButton("Fire1") && Time.time >= Time.deltaTime + m_fireRate )
 		{
 			Fire ();		
 		}
