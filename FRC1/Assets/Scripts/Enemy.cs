@@ -26,6 +26,8 @@ public class Enemy : Unit {
 
 		target = GameObject.Find ("Ship").transform;
 		ChangeState (STATE_SEARCH);
+
+		gameObject.name = "EnemyShip";
 	}
 
 	float GetDistance()
@@ -80,7 +82,7 @@ public class Enemy : Unit {
 	void ChangeState(int NEW_STATE)
 	{
 		m_state = NEW_STATE;
-		print ("New State " + m_state.ToString ());
+		//print ("New State " + m_state.ToString ());
 		switch (m_state) {
 			case STATE_SEARCH:
 				StartCoroutine("CR_SEARCH");
@@ -116,7 +118,7 @@ public class Enemy : Unit {
 		isReadyToFire = false;
 		StartCoroutine (CR_FireCooldown ());
 
-		print ("shoot");
+		//print ("shoot");
 		//instantiate bullet code
 
 		GameObject bullet = (GameObject)Instantiate (prefabBullet, transform.position + transform.forward * 5, transform.rotation);
