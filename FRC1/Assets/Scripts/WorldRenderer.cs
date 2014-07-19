@@ -33,6 +33,7 @@ public class WorldRenderer : MonoBehaviour {
             spawnTimer += Time.deltaTime * spawnRate;
             // if it's time to respawn
             SpawnObjects();
+            DelteFarObjects();
         }
         
         // Gets an appropriate offset for the world object
@@ -51,6 +52,19 @@ public class WorldRenderer : MonoBehaviour {
                 GameObject obj = getNextSpawnObject();
                 if (obj.GetComponent("Enemy") != null) foregroundObjects.Add(obj);
                 else backgroundObjects.Add(obj);
+            }
+        }
+
+        void DelteFarObjects()
+        {
+            for (int i = backgroundObjects.Count - 1; i >= 0; i--)
+            {
+                GameObject obj = backgroundObjects[i];
+                if (Vector3.Distance(player.transform.position, obj.transform.position) > renderRadius)
+                {
+                    backgroundObjects.RemoveAt(i);
+                    Destroy( obj );
+                }
             }
         }
 
