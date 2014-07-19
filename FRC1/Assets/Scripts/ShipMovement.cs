@@ -14,6 +14,10 @@ public class ShipMovement : MonoBehaviour
         // Update is called once per frame
         void Update()
         {
+		//if(Input.GetAxis("Horizontal")*Time.deltaTime)
+		//{
+		//	this.transform.position += this.transform.right;
+		//}
             transform.Translate(Input.GetAxis("Horizontal")*Time.deltaTime*Player.m_speed, Input.GetAxis("Vertical")*Time.deltaTime*Player.m_speed, 0);
         }
 
