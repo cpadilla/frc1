@@ -10,7 +10,7 @@ public class Background : MonoBehaviour
 	
 	public GameObject background_SmallPlanet;
 	public GameObject background_LargePlanet;
-	
+	public GameObject playerShip;
 	
 	void Awake()
 	{
