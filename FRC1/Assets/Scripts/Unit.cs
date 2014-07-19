@@ -9,4 +9,12 @@ public class Unit : MonoBehaviour {
 	public float m_rotation;
 
 
+	public void Hit()
+	{
+		m_health-=1;
+
+	}
+
+
+
 }
