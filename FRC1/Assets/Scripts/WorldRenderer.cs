@@ -29,8 +29,8 @@ public class WorldRenderer : MonoBehaviour {
                 // get random position for object
                 float rnd = Random.Range(-renderRadius, renderRadius);
                 while (rnd == 0.0f) rnd = Random.Range(-renderRadius, renderRadius);
-                //float randomOffset = (Mathf.Abs(rnd) > minSpawnDistance) ? rnd : rnd + (rnd/rnd)minSpawnDistance;
-                planet.transform.Translate(Random.Range(-renderRadius, renderRadius), Random.Range(-renderRadius, renderRadius), Random.Range(-renderRadius, renderRadius));
+                float randomOffset = (Mathf.Abs(rnd) > minSpawnDistance) ? rnd : rnd + ((rnd > 0) ? 1 : -1) * minSpawnDistance;
+                planet.transform.Translate(randomOffset, randomOffset, 0);
                 backgroundObjects.Add(planet);
 
             }
