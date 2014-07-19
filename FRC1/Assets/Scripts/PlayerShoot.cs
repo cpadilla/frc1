@@ -40,12 +40,12 @@ public class PlayerShoot : MonoBehaviour {
 	{
 		if(RightGun)
 		{		
-			nBullet= (GameObject)Instantiate(bullet,(mainGuns[1].transform.position),transform.rotation);
+			nBullet= (GameObject)Instantiate(bullet,(mainGuns[1].transform.position),this.transform.rotation);
 			RightGun = false;
 		}
 		else
 		{
-			nBullet= (GameObject)Instantiate(bullet,(mainGuns[0].transform.position),transform.rotation);
+			nBullet= (GameObject)Instantiate(bullet,(mainGuns[0].transform.position),this.transform.rotation);
 			RightGun = true;
 		}
 		
