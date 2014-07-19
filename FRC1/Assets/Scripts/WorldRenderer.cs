@@ -5,35 +5,64 @@ using System.Collections.Generic;
 public class WorldRenderer : MonoBehaviour {
 
         public GameObject player;
+
         public GameObject smallPlanet;
         public GameObject largePlanet;
 
         public List<GameObject> foregroundObjects;
         public List<GameObject> backgroundObjects;
-        public float renderRadius = 100.0f;
+        public List<GameObject> prefabs;
 
-        private float updateRate = 2.0f;
-        private float minSpawnDistance = 30.0f;
+        public float renderRadius = 400.0f;
+        private float updateRate = 1000.0f;
+        private float minSpawnDistance = 3.0f;
+        private int maxObjectCount = 30;
+        private int initObjectCount = 3;
+
+        void Awake()
+        {
+            prefabs.Add(smallPlanet);
+            prefabs.Add(largePlanet);
+            for (int i = 0; i < initObjectCount; i++) SpawnObjects();
+        }
 
 	// Use this for initialization
 	void Start () {
-
+            for (int i = 0; i < initObjectCount; i++) SpawnObjects();
 	}
 	
 	// Update is called once per frame
 	void Update () {
             // if it's time to respawn
-            if (Time.time > Time.deltaTime * updateRate) {
-                GameObject planet = (GameObject)Instantiate(smallPlanet, player.transform.position, transform.rotation);
-                
-                // get random position for object
-                float rnd = Random.Range(-renderRadius, renderRadius);
-                while (rnd == 0.0f) rnd = Random.Range(-renderRadius, renderRadius);
-                float randomOffset = (Mathf.Abs(rnd) > minSpawnDistance) ? rnd : rnd + ((rnd > 0) ? 1 : -1) * minSpawnDistance;
-                planet.transform.Translate(randomOffset, randomOffset, 0);
-                backgroundObjects.Add(planet);
+            SpawnObjects();
+        }
+        
+        // Gets an appropriate offset for the world object
+        float getRandomOffset(float renderRadius, float minSpawnDistance)
+        {
+            float rnd = Random.Range(-renderRadius, renderRadius);
+            while (rnd == 0.0f) rnd = Random.Range(-renderRadius, renderRadius);
+            return  (Mathf.Abs(rnd) > minSpawnDistance) ? rnd : rnd + ((rnd > 0) ? 1 : -1) * minSpawnDistance;
+        }
 
+        void SpawnObjects()
+        {
+            // if it's time to spawn objects and there is a need for objects
+            if (Time.time > Time.deltaTime * updateRate && backgroundObjects.Count <= maxObjectCount)
+            {
+                GameObject obj = getNextSpawnObject();
+                backgroundObjects.Add(obj);
             }
+        }
 
+        GameObject getNextSpawnObject()
+        {
+            GameObject obj = (GameObject)Instantiate(prefabs[Random.Range(0, prefabs.Count)], player.transform.position, transform.rotation);
+            // get random position for object
+            float xrandomOffset = getRandomOffset(renderRadius, minSpawnDistance);
+            float yrandomOffset = getRandomOffset(renderRadius, minSpawnDistance);
+            float zrandomOffset = Mathf.Abs(getRandomOffset(renderRadius, minSpawnDistance));
+            obj.transform.Translate(xrandomOffset, yrandomOffset, zrandomOffset);
+            return obj;
         }
 }
