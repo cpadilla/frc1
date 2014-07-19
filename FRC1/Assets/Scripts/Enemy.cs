@@ -7,24 +7,28 @@ public class Enemy : Unit {
 	const int STATE_ATTACK = 1;
 
 	int m_state = 0;
-	float m_search_distance = 15f;
-	float m_rof = .5f; 				//rate of fire
-	float m_range = 5f;
+	public float m_search_distance = 15f;
+	public float m_rof = .5f; 				//rate of fire
+	public float m_range = 5f;
 
-	static Transform target;
+	public float rotate_rate = 20;
+
+	public static Transform target;
 
 	void Awake()
 	{
 		m_health = 1;
 		m_speed = 10;
-		ChangeState (STATE_SEARCH);
 
 		target = GameObject.Find ("Ship").transform;
+		ChangeState (STATE_SEARCH);
 	}
 
 	float GetDistance()
 	{
-		return Mathf.Abs (Vector3.Distance (transform.position, target.position));
+		float val = Mathf.Abs (Vector3.Distance (transform.position, target.position)); 
+		print (val);
+		return val;
 	}
 
 	IEnumerator CR_SEARCH()
@@ -49,6 +53,8 @@ public class Enemy : Unit {
 					Attack();					//attack
 					yield return new WaitForSeconds(m_rof);
 				}
+				else
+					MoveToTarget();				//move closer
 			}
 			else 		//outside of sight range, go to Search State
 				break;
@@ -63,6 +69,7 @@ public class Enemy : Unit {
 	void ChangeState(int NEW_STATE)
 	{
 		m_state = NEW_STATE;
+		print ("New State " + m_state.ToString ());
 		switch (m_state) {
 			case STATE_SEARCH:
 				StartCoroutine("CR_SEARCH");
@@ -72,6 +79,22 @@ public class Enemy : Unit {
 				StartCoroutine("CR_ATTACK");
 			break;
 		}
+	}
+
+	void OnGUI()
+	{
+		Debug.DrawLine (transform.position, transform.position + transform.forward * m_search_distance);
+	}
+
+	void MoveToTarget()
+	{
+		Vector3 targetDir = target.position - transform.position;
+		float step = rotate_rate * Time.deltaTime;
+		Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+		transform.rotation = Quaternion.LookRotation(new Vector3(newDir.x, newDir.y, 0));
+
+		transform.position += transform.forward * m_speed * Time.deltaTime;
+		//transform.postion = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime);
 	}
 
 	void Attack()
