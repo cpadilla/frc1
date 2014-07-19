@@ -2,8 +2,8 @@
 public class Player : MonoBehaviour
 {
 	//Variables
-        public float m_speed = 100.00f;
-        public float r_speed = 3.0f;
+        public float m_speed = 10.00f;
+        public float r_speed = 8.0f;
 
         // Use this for initialization
         void Start()
