@@ -5,7 +5,13 @@ public class Background : MonoBehaviour
 {
 	
 	private Player m_cPlayer;
+	
 	public ParticleSystem background_StarSystem;
+	
+	public GameObject background_SmallPlanet;
+	public GameObject background_LargePlanet;
+	
+	
 	void Awake()
 	{
 		m_cPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();

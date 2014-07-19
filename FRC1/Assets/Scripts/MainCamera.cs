@@ -14,7 +14,7 @@ public class MainCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-            transform.Rotate(0,0,-Input.GetAxis("Horizontal") *Time.deltaTime* player.r_speed);
-            transform.Translate(0, Input.GetAxis("Vertical")*Time.deltaTime*player.m_speed, 0);
+            transform.Rotate(0, 0, player.h_Input * Time.deltaTime* player.r_speed);
+            transform.Translate(0, player.v_Input * Time.deltaTime *player.m_speed, 0);
 	}
 }
