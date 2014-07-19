@@ -4,11 +4,11 @@ using System.Collections;
 public class Background : MonoBehaviour 
 {
 	
-	
+	private Player m_cPlayer;
 	public ParticleSystem background_StarSystem;
 	void Awake()
 	{
-		
+		m_cPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 	}
 	
 	// Use this for initialization
@@ -20,13 +20,13 @@ public class Background : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(Player.Instance.moving)
+		if(m_cPlayer.moving)
 		{
-			background_StarSystem.gravityModifier = .5f;
+			background_StarSystem.gravityModifier = .2f;
 		}
 		else
 		{
-			background_StarSystem.gravityModifier = .1f;
+			background_StarSystem.gravityModifier = 0f;
 		}
 	}
 }

@@ -11,8 +11,8 @@ public class Player : MonoBehaviour
         public bool moving = false;
 		
 		
-		private float v_Input = 0f;
-		private float h_Input = 0f;
+		public float v_Input = 0f;
+		public float h_Input = 0f;
         // Use this for initialization
         void Awake()
         {
