@@ -14,14 +14,19 @@ public class WorldRenderer : MonoBehaviour {
         public List<GameObject> backgroundObjects;
         public List<GameObject> prefabs;
 
+        // World Renderer
         public float renderRadius = 400.0f;
         private float minSpawnDistance = 3.0f;
         private int maxObjectCount = 30;
         private int initObjectCount = 3;
 
+        // spawn timer
         private float spawnTimer = 0.0f;
         private float spawnRate = 100.0f;
         private float spawnInterval = 100.0f;
+
+        // Prefab Offsets
+        private float largePlanetOffset = 100.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -76,6 +81,12 @@ public class WorldRenderer : MonoBehaviour {
             float yrandomOffset = getRandomOffset(renderRadius, minSpawnDistance);
             float zrandomOffset = Mathf.Abs(getRandomOffset(renderRadius, minSpawnDistance));
             obj.transform.Translate(xrandomOffset, yrandomOffset, zrandomOffset);
+
+            if (obj.tag == "LargePlanet")
+            {
+                obj.transform.Translate(0, 0, largePlanetOffset);
+            }
+
             return obj;
         }
 }
