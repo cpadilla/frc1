@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 68c3f2c096bdee34ba478356d30672e5
 TextureImporter:
+  fileIDToRecycleName:
+    21300000: planet3MapRefraction
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -35,6 +37,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
