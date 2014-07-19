@@ -16,6 +16,16 @@ public class Player : MonoBehaviour
             transform.Rotate(0,0,-Input.GetAxis("Horizontal") *Time.deltaTime* r_speed);
             transform.Translate(0, Input.GetAxis("Vertical")*Time.deltaTime*m_speed, 0);
         }
+	
+	void OnTriggerEnter(Collider other)
+	{
+		print (other.name);
+		switch (other.name) {
+			case "EnemyShip":
+			Destroy(other.gameObject);
+			break;
+		}
+	}
 
 		//transform.Rotate(Input.GetButton("Up"),90.0f);
 
