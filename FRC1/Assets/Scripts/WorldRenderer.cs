@@ -4,10 +4,16 @@ using System.Collections.Generic;
 
 public class WorldRenderer : MonoBehaviour {
 
+        public GameObject player;
+        public GameObject smallPlanet;
+        public GameObject largePlanet;
+
         public List<GameObject> foregroundObjects;
         public List<GameObject> backgroundObjects;
+        public float renderRadius = 100.0f;
 
         private float updateRate = 2.0f;
+        private float minSpawnDistance = 30.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +24,14 @@ public class WorldRenderer : MonoBehaviour {
 	void Update () {
             // if it's time to respawn
             if (Time.time > Time.deltaTime * updateRate) {
-
+                GameObject planet = (GameObject)Instantiate(smallPlanet, player.transform.position, transform.rotation);
+                
+                // get random position for object
+                float rnd = Random.Range(-renderRadius, renderRadius);
+                while (rnd == 0.0f) rnd = Random.Range(-renderRadius, renderRadius);
+                //float randomOffset = (Mathf.Abs(rnd) > minSpawnDistance) ? rnd : rnd + (rnd/rnd)minSpawnDistance;
+                planet.transform.Translate(Random.Range(-renderRadius, renderRadius), Random.Range(-renderRadius, renderRadius), Random.Range(-renderRadius, renderRadius));
+                backgroundObjects.Add(planet);
 
             }
 

@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
         public float m_speed = 10.0f;
         public float r_speed = 50.0f;
 
+        public int life = 1;
+        public GameObject weapon;
         public bool moving = false;
 		
 		
