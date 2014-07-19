@@ -5,18 +5,17 @@ using System.Collections;
 public class PlayerShoot : MonoBehaviour 
 {
 	
+
 	
 	public GameObject [] 	bulletTypes;
-	public GameObject [] 	mainGunsSpawners;
-	public GameObject [] 	sideGunsSpawners; 
+	public GameObject [] 	mainGuns;
+	public GameObject [] 	sideGuns; 
 	
-	public int 				bulletTypesIndex = 0;
-	public int 				ship_FireTypeIndex = 0;
-	public int 				mainGun_FireTypeIndex = 0;
-	public int 				sideGun_FireTypeIndex = -1;
-	public int 				m_fireRateIndex = 0;	
+	[HideInInspector]
+	public float 			m_fireRate	=	1f;
 	
 	private float [] 		m_fireRateMult;
+
 	private float 			m_fireRate	=	1f;
 	private float 			m_Timer = 0.0f;
 	
@@ -31,11 +30,16 @@ public class PlayerShoot : MonoBehaviour
 	private bool		 	mainGun_stageredFireRight = true;
 	private bool 		 	sideGuns_StageredFireRight = true;
 	private int 		 	sideGunsSpawnersIndex = 0;
+
 	
-	
+	private bool		 doubleGuns_stagaredFire = false;
+	private bool 		 doubleGuns_doubleFire = false;
+     
+	private float 		 m_fBulletSpeed = 1.0f;
 	// Use this for initialization
 	void Start () 
 	{
+
 		ship_FireType = new bool [2];
 		ship_FireType[0] = true;
 		ship_FireType[1] = false;
@@ -54,9 +58,9 @@ public class PlayerShoot : MonoBehaviour
 		topGun_FireType[1] = false;
 		 	
 		m_fireRateMult = new float[3];
-		m_fireRateMult[0] = 3f;
-		m_fireRateMult[1] = 6f;
-		m_fireRateMult[2] = 9f;
+		m_fireRateMult[0] = 2.5f;
+		m_fireRateMult[1] = 5.0f;
+		m_fireRateMult[2] = 7.5f;
 	}
 	
 	// Update is called once per frame
@@ -88,41 +92,31 @@ public class PlayerShoot : MonoBehaviour
 			ship_FireType[0] = false;
 			ship_FireType[1] = false;
 			ship_FireType[2] = true;
-		}
-		
+		}		
 	}
-	
+
 	private void Fire()
 	{
-		if(ship_FireType[0])		// main guns
+		if(mainGun_stageredFire)
 		{
-			switch(mainGun_FireTypeIndex)
-			{
-			case 0:
-			{
-				if(mainGun_stageredFireRight)
-				{
-					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunsSpawners[0].transform.position),transform.rotation);
-					mainGun_stageredFireRight = false;
-				}
-				else
-				{
-					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunsSpawners[1].transform.position),transform.rotation);
-					mainGun_stageredFireRight = true;
-				}
-				break;
+			if(mainGun_stageredFireRight)
+			{		
+				nBullet= (GameObject)Instantiate(bulletTypes[0],(mainGuns[1].transform.position - transform.forward),transform.rotation);
+				mainGun_stageredFireRight = false;
+				nBullet.transform.Translate(new Vector3(0,0,m_fBulletSpeed));
 			}
-				
-			case 1:
+			else
 			{
-				nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunsSpawners[0].transform.position),transform.rotation);
-				nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunsSpawners[1].transform.position),transform.rotation);
-				break;
+				nBullet= (GameObject)Instantiate(bulletTypes[0],(mainGuns[0].transform.position- transform.forward),transform.rotation);
+				mainGun_stageredFireRight = true;
+				nBullet.transform.Translate(new Vector3(0,0,m_fBulletSpeed));
 			}
-			}
+			
+
 		}
-		else if(ship_FireType[1])	// side guns 
+		else if(mainGun_doubleFire)
 		{
+
 			
 			
 			switch(sideGun_FireTypeIndex)
@@ -178,21 +172,12 @@ public class PlayerShoot : MonoBehaviour
 	{
 		if(Input.GetKeyDown(KeyCode.B))
 		{
-			if(mainGun_FireTypeIndex == 0)
-				mainGun_FireTypeIndex = 1;
-			else
-				mainGun_FireTypeIndex = 0;
-				
+			if(mainGun_stageredFire)
+			{
+				mainGun_stageredFire = false;
+				mainGun_doubleFire = true;
+			}
 		}
-		
-		else if(Input.GetKeyDown(KeyCode.H))
-		{
-			if(ship_FireTypeIndex == 0)
-				ship_FireTypeIndex = 1;
-			else
-				ship_FireTypeIndex = 0;
-		}
-		
 		else if (Input.GetKeyDown(KeyCode.Alpha0))
 		{
 			m_fireRateIndex  = 0;
