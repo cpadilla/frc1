@@ -18,6 +18,11 @@ public class Laser : MonoBehaviour {
 
 		//this.transform.position += this.transform.forward*Time.deltaTime;
 
-		transform.position += transform.up * Time.deltaTime*100;
+		transform.position += transform.up * Time.deltaTime*10;
+	}
+
+	void OnTriggerEnter(Collider trigger)
+	{
+		Destroy (this.gameObject);
 	}
 }
