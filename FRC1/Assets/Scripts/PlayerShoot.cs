@@ -2,7 +2,8 @@
 
 using System.Collections;
 
-public class PlayerShoot : MonoBehaviour {
+public class PlayerShoot : MonoBehaviour 
+{
 	
 	
 	public GameObject [] 	bulletTypes;
@@ -19,16 +20,17 @@ public class PlayerShoot : MonoBehaviour {
 	private float 			m_fireRate	=	1f;
 	private float 			m_Timer = 0.0f;
 	
-	private bool []      ship_FireType;
-	private bool [] 	 mainGun_FireType;
-	private bool []      sideGun_FireType;
+	private bool []      	ship_FireType;
+	private bool [] 	 	mainGun_FireType;
+	private bool []      	sideGun_FireType;
+	private bool []		    topGun_FireType;
 	
-	private GameObject   nBullet;
-	private float 		 m_fBulletSpeed = 6.0f;
-	
-	private bool		 mainGun_stageredFireRight = true;
-	private bool 		 sideGuns_StageredFireRight = true;
-	private int 		 sideGunsSpawnersIndex = 0;
+	private GameObject   	nBullet;
+	private float 		 	m_fBulletSpeed = 6.0f;
+		
+	private bool		 	mainGun_stageredFireRight = true;
+	private bool 		 	sideGuns_StageredFireRight = true;
+	private int 		 	sideGunsSpawnersIndex = 0;
 	
 	
 	// Use this for initialization
@@ -37,15 +39,20 @@ public class PlayerShoot : MonoBehaviour {
 		ship_FireType = new bool [2];
 		ship_FireType[0] = true;
 		ship_FireType[1] = false;
+		ship_FireType[2] = false;
 		
 		mainGun_FireType = new bool [2];
 		mainGun_FireType[0] = true;
 		mainGun_FireType[1] = false;
 		
 		sideGun_FireType = new bool [2];
-		sideGun_FireType[0] = false;
+		sideGun_FireType[0] = true;
 		sideGun_FireType[1] = false;
 		
+		topGun_FireType = new bool[2];
+		topGun_FireType[0] = true;
+		topGun_FireType[1] = false;
+		 	
 		m_fireRateMult = new float[3];
 		m_fireRateMult[0] = 3f;
 		m_fireRateMult[1] = 6f;
@@ -68,11 +75,19 @@ public class PlayerShoot : MonoBehaviour {
 		{
 			ship_FireType[0] = true;
 			ship_FireType[1] = false;
+			ship_FireType[2] = false;
+		}
+		else if(ship_FireTypeIndex == 1)
+		{
+			ship_FireType[0] = false;
+			ship_FireType[1] = true;
+			ship_FireType[2] = false;
 		}
 		else
 		{
 			ship_FireType[0] = false;
-			ship_FireType[1] = true;
+			ship_FireType[1] = false;
+			ship_FireType[2] = true;
 		}
 		
 	}
@@ -108,6 +123,8 @@ public class PlayerShoot : MonoBehaviour {
 		}
 		else if(ship_FireType[1])	// side guns 
 		{
+			
+			
 			switch(sideGun_FireTypeIndex)
 			{
 			case 0:
@@ -142,6 +159,17 @@ public class PlayerShoot : MonoBehaviour {
 			}
 			}
 			
+		}
+		else if(sideGun_FireType[2])
+		{
+			switch(sideGun_FireTypeIndex)
+			{
+				case 0:
+				{
+					
+					break;
+				}
+			}
 		}
 		
 	}
