@@ -11,7 +11,6 @@ public class SpawnManager : MonoBehaviour {
             floatingObjects = new List<GameObject>();
             //Instantiate(GameObject.Find("Enemy"))
 	}
-	
 	// Update is called once per frame
 	void Update () {
             
