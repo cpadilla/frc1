@@ -1,8 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\ShipMovement.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerShoot.cs">
     <Files>
-      <File FileName="Assets\ShipMovement.cs" Line="5" Column="14" />
+      <File FileName="Assets\Scripts\PlayerShoot.cs" Line="27" Column="4" />
+      <File FileName="Assets\Scripts\ShipMovement.cs" Line="18" Column="3" />
+      <File FileName="Assets\Scripts\Laser.cs" Line="6" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

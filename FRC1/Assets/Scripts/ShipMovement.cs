@@ -16,4 +16,9 @@ public class ShipMovement : MonoBehaviour
             transform.Translate(0, Input.GetAxis("Vertical")*Time.deltaTime*Player.m_speed, 0);
         }
 
-}
+		//transform.Rotate(Input.GetButton("Up"),90.0f);
+
+	}
+
+
+
