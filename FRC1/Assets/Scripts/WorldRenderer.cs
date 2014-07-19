@@ -8,6 +8,7 @@ public class WorldRenderer : MonoBehaviour {
 
         public GameObject smallPlanet;
         public GameObject largePlanet;
+        public GameObject enemy;
 
         public List<GameObject> foregroundObjects;
         public List<GameObject> backgroundObjects;
@@ -22,16 +23,9 @@ public class WorldRenderer : MonoBehaviour {
         private float spawnRate = 100.0f;
         private float spawnInterval = 100.0f;
 
-        void Awake()
-        {
-            prefabs.Add(smallPlanet);
-            prefabs.Add(largePlanet);
-            for (int i = 0; i < initObjectCount; i++) SpawnObjects();
-        }
-
 	// Use this for initialization
 	void Start () {
-            for (int i = 0; i < initObjectCount; i++) SpawnObjects();
+            //for (int i = 0; i < initObjectCount; i++) SpawnObjects();
 	}
 	
 	// Update is called once per frame
@@ -55,7 +49,8 @@ public class WorldRenderer : MonoBehaviour {
             if (spawnTimer > Time.deltaTime * spawnInterval && backgroundObjects.Count <= maxObjectCount)
             {
                 GameObject obj = getNextSpawnObject();
-                backgroundObjects.Add(obj);
+                if (obj.GetComponent("Enemy") != null) foregroundObjects.Add(obj);
+                else backgroundObjects.Add(obj);
             }
         }
 

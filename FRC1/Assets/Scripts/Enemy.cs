@@ -4,6 +4,7 @@ using System.Collections;
 public class Enemy : Unit {
 
 	public GameObject prefabBullet;
+	public GameObject player;
 
 	const int STATE_SEARCH = 0;
 	const int STATE_ATTACK = 1;
@@ -24,17 +25,29 @@ public class Enemy : Unit {
 		m_health = 1;
 		m_speed = 10;
 
-		target = GameObject.Find ("Ship").transform;
+		//target = player.transform;
 		ChangeState (STATE_SEARCH);
 
 		gameObject.name = "EnemyShip";
 	}
 
+        void Start()
+        {
+        }
+
 	float GetDistance()
 	{
-		float val = Mathf.Abs (Vector3.Distance (transform.position, target.position)); 
-		//print (val);
-		return val;
+            try
+            {
+                target = player.transform;
+                float val = Mathf.Abs (Vector3.Distance (transform.position, target.position)); 
+                //print (val);
+                return val;
+            }
+            catch (System.Exception)
+            {
+                return 0.0f;
+            }
 	}
 
 	IEnumerator CR_SEARCH()
