@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Periphery : MonoBehaviour {
-
+public class Background : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
