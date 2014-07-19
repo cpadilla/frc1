@@ -34,7 +34,7 @@ public class PlayerShoot : MonoBehaviour {
 		m_fireRateMult = new float[3];
 		m_fireRateMult[0] = 2.5f;
 		m_fireRateMult[1] = 5.0f;
-		m_fireRateMult[2] = 7.5;
+		m_fireRateMult[2] = 7.5f;
 	}
 	
 	// Update is called once per frame
