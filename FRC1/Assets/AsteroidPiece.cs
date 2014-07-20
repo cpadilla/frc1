@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AsteroidPiece : MonoBehaviour {
+public class AsteroidPiece : Unit {
 
 	// Use this for initialization
 	void Start () {
@@ -13,14 +13,22 @@ public class AsteroidPiece : MonoBehaviour {
 	
 	}
 
-	void OnTriggerEnter(Collider collider)
+	void OnTriggerEnter(Collider other)
 	{
-		Unit entity=collider.GetComponent<Unit>();
 
-		if(entity)
-			entity.Hit();
 
-		Destroy(gameObject);
-		Destroy(collider.gameObject);
+		print (other.name);
+		switch (other.name) {
+		case "EnemyShip":
+			Unit enemy= (Unit)other.gameObject.GetComponent<Unit>();
+			enemy.Hit();
+			break;
+		case "Laser":
+
+			gameObject.GetComponent<Unit>().Hit ();
+			break;
+	
+		}
+		
 	}
 }

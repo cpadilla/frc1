@@ -27,11 +27,17 @@ public class Laser :Unit {
 
 	void OnTriggerEnter(Collider trigger)
 	{
-		Unit unit=trigger.gameObject.GetComponent<Unit>();
-		if(unit && unit.tag!= ("Player"))
-			unit.Hit();
+		switch(trigger.gameObject.name)
+		{
+		case"Asteroid_Orig":
+				Unit ast=  trigger.gameObject.GetComponent<Unit>();
+				ast.Hit ();
+			break;
+		case "Asteroid_Piece":
+			Destroy(trigger.gameObject);
+			break;
+		}
 
-		Destroy (this.gameObject);
 	}
 }
 

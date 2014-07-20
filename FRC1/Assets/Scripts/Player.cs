@@ -37,7 +37,7 @@ public float v_Input = 0f;
 		m_speed = 10.0f;
 
 		//Health
-		m_health = 1;
+		m_health = 3.0f;
 
         string text= m_score.ToString();
 		
@@ -87,11 +87,18 @@ public float v_Input = 0f;
 			break;
 			case "Laser":
 
+			if(other.gameObject.tag!="PlayerProj")
+				Hit ();
+
 			break;
 			case "Powerup":
 				Powerup collected = other.GetComponent<Powerup>();
 				CollectedPowerup(collected.type);
 				
+			break;
+		case "Astroid_Orig":
+			Destroy(other.gameObject);
+			
 			break;
 		}
 	}
@@ -121,6 +128,9 @@ public float v_Input = 0f;
 
 		if(m_health<=0)
 			GUI.Label(new Rect(0,0,30,30),"YOU LOSE",scoreStyle);
+
+		GUI.Label(new Rect(0,0,30,30),m_health.ToString(),scoreStyle);
+
 	}
 }
 

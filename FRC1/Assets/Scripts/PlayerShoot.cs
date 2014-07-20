@@ -65,7 +65,7 @@ public class PlayerShoot : MonoBehaviour
 		topGun_FireType[1] = false;
 		
 		m_fireRateMult = new float[3];
-		m_fireRateMult[0] = 3f;
+		m_fireRateMult[0] = 10f;
 		m_fireRateMult[1] = 6f;
 		m_fireRateMult[2] = 9f;
 	}
@@ -114,6 +114,7 @@ public class PlayerShoot : MonoBehaviour
 					{		
 					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[1].transform.position - transform.forward),transform.rotation);
 						mainGun_stageredFireRight = false;
+					nBullet.tag="PlayerProj";
 					}
 					else
 					{
