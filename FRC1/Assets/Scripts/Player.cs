@@ -145,7 +145,6 @@ public class Player : Unit
         if (m_health<=0)
         {
             //Destroy(gameObject);
-            Player.m_score = -99999;
         }
     }
 }
