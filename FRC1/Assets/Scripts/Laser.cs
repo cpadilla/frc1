@@ -39,6 +39,7 @@ public class Laser :Unit {
 
 	void OnTriggerEnter(Collider trigger)
 	{
+		print("LASER COLLIDING!"+trigger.gameObject.name);
 		switch(trigger.gameObject.name)
 		{
 		case"Asteroid_Orig":
