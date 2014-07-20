@@ -155,6 +155,7 @@ public class Enemy : Unit {
 	{
 	
 		base.Hit();
+
 	}
 	void OnDestroy()
 	{

@@ -2,12 +2,16 @@
 public class Player : Unit
 {
 
-        //Class Instance 
-        public static Player Instance;
-        public static GameObject MainPlayer;
-        public GameObject weapon;
+	//Boolean
+	public bool isAlive;
+	public GameObject soundDummy;
 
-        public int Score;
+    //Class Instance 
+    public static Player Instance;
+    public static GameObject MainPlayer;
+    public GameObject weapon;
+
+    public int Score;
 	public int scoreOT=10; //Score over time
 	public float scoreTimer=0.0f;
 	//oe
@@ -50,11 +54,13 @@ public class Player : Unit
 		m_scoreRect.width = m_scoreRect.x+100;
 		m_scoreRect.height= m_scoreRect.y +20;
 
+		isAlive=true;
 	}
 	// Update is called once per frame
 	void Update()
 	{
-        Score = m_score;
+		if(isAlive)
+		{Score = m_score;
 
 		scoreTimer+=Time.deltaTime;
 
@@ -86,6 +92,8 @@ public class Player : Unit
 	    	r_speed -= Time.deltaTime;
 	     else
 	    	r_speed = 50.0f;
+		}
+
 	}
 
 	//transform.Rotate(Input.GetButton("Up"),90.0f);
@@ -154,9 +162,18 @@ public class Player : Unit
         m_health-=1;
         if (m_health<=0)
         {
+			isAlive=false;
+			Instantiate(soundDummy,this.transform.position,this.transform.rotation);
             //Destroy(gameObject);
         }
     }
+
+	void Die()
+	{
+
+		Instantiate(soundDummy,this.transform.position,this.transform.rotation);
+
+	}
 }
 
 
