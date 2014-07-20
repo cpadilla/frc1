@@ -4,6 +4,7 @@ public class Player : Unit
 
 	//Class Instance 
 	public static Player Instance;
+        public static GameObject MainPlayer;
 
       public float r_speed = 50.0f;
 
@@ -15,7 +16,7 @@ public float v_Input = 0f;
 
 
 	//oe
-	public int m_score=0;
+	public static int m_score=0;
 
 	public GUIStyle scoreStyle;
 

@@ -4,6 +4,7 @@ using System.Collections;
 public class Asteroid : Unit {
 
 	public GameObject[] explosion;
+	public GameObject player;
 	public Vector3 pos;
 
 	//
@@ -50,7 +51,8 @@ public class Asteroid : Unit {
 
 	void OnDestroy()
 	{
-		FindObjectOfType<Player>().m_score+=100;
+		Player.m_score+=100;
+
 
 
 	}
