@@ -47,7 +47,7 @@ public class Laser :Unit {
                 {
 					Enemy en= trigger.GetComponent<Enemy>();
 
-                    Player.m_score+= en.m_score;
+                    
                     unit.Hit();
                 }
                

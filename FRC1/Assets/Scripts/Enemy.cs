@@ -31,7 +31,7 @@ public class Enemy : Unit {
 		m_speed = 10;
 
 		gameObject.name = "EnemyShip";
-                player = Player.Instance.gameObject;
+        player = Player.Instance.gameObject;
 	}
 	void Start()
 	{
@@ -53,7 +53,7 @@ public class Enemy : Unit {
 
                 if(other.tag == "PlayerBullet")
                 {
-                    //Player.m_score += m_score;
+                    
                     //throw new System.Exception();
                 }
 
@@ -198,5 +198,10 @@ public class Enemy : Unit {
 	void OnDestroy()
 	{
 		//EnemySpawner.getInstance ().RemoveEnemy (m_typeIndex, gameObject);
+		Player play= player.GetComponent<Player>();
+
+		Player.m_score+=m_score;
+
+
 	}
 }

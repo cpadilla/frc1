@@ -2,8 +2,8 @@
 public class Player : Unit
 {
 
-	//Class Instance 
-	public static Player Instance;
+		//Class Instance 
+		public static Player Instance;
         public static GameObject MainPlayer;
 
         public int Score;
@@ -14,6 +14,9 @@ public class Player : Unit
         public float v_Input = 0f;
         public float h_Input = 0f;
 
+	//Score over time
+	public int scoreOT=10;
+	public float scoreTimer=0.0f;
 
 	//oe
 	public static int m_score=0;
@@ -54,7 +57,17 @@ public class Player : Unit
 	// Update is called once per frame
 	void Update()
 	{
-            Score = m_score;
+        Score = m_score;
+
+		scoreTimer+=Time.deltaTime;
+
+		if(scoreTimer >=1.0f)
+		{
+			m_score+=scoreOT;
+			scoreTimer=0;
+		}
+
+
 		// Store the input from the player
 	    v_Input = Input.GetAxis("Vertical");
 	    h_Input = -Input.GetAxis("Horizontal");
