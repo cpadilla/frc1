@@ -3,6 +3,7 @@ Temp
 *.pidb
 *.sln 
 Temp/
+bin/
 Obj/
 UnityGenerated/
 Library/
