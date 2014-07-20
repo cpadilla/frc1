@@ -11,12 +11,18 @@ public class PlayerShoot : MonoBehaviour
 	public GameObject [] 	bulletTypes;
 	public GameObject []	mainGunSpawners;
 	public GameObject []    sideGunsSpawners;
+	public GameObject []	topGunsSpawners;
 	
 	public int 				bulletTypesIndex = 0;
+	
 	public int 				ship_FireTypeIndex = 0;
+	
 	public int 				mainGunFireTypeIndex = 0;
+	
 	public int 				sideGun_FireTypeIndex = 0;
+	
 	public int 				topGunFireTypeIndex = 0;
+	
 	public int				m_fireRateIndex = 0;
 	
 	private float [] 		m_fireRateMult;
@@ -116,13 +122,13 @@ public class PlayerShoot : MonoBehaviour
 				{
 					if(mainGun_stageredFireRight)
 					{		
-						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[1].transform.position - transform.forward),transform.rotation);
+						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[0].transform.position),transform.rotation);
 						mainGun_stageredFireRight = false;
                               
 					}
 					else
 					{
-						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[0].transform.position- transform.forward),transform.rotation);
+						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[0].transform.position),transform.rotation);
 						mainGun_stageredFireRight = true;
 					}
 					 break;
@@ -194,19 +200,6 @@ public class PlayerShoot : MonoBehaviour
 		}
 		
 		if(Input.GetKeyDown(KeyCode.N))
-		{
-			if(mainGunFireTypeIndex == 0)
-			{
-				mainGunFireTypeIndex = 1;
-			}
-			else
-			{
-				mainGunFireTypeIndex = 0;
-			}
-		}
-		
-		
-		if(Input.GetKeyDown(KeyCode.M))
 		{
 			if(mainGunFireTypeIndex == 0)
 			{
