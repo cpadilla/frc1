@@ -25,7 +25,9 @@ public class Laser :Unit {
 
 	void OnTriggerEnter(Collider trigger)
 	{
-		trigger.gameObject.GetComponent<Unit>().Hit();
+		Unit unit=trigger.gameObject.GetComponent<Unit>();
+		if(unit && unit.tag!= ("Player"))
+			unit.Hit();
 
 		Destroy (this.gameObject);
 	}

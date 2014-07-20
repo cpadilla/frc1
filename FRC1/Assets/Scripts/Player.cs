@@ -1,22 +1,20 @@
 ﻿using UnityEngine; using System.Collections; 
-public class Player : MonoBehaviour
+public class Player : Unit
 {
 
 	//Class Instance 
 	public static Player Instance;
-	//Variables
-        public float m_speed = 10.0f;
-        public float r_speed = 50.0f;
 
-        public int life = 1;
-        public GameObject weapon;
-        public bool moving = false;
-		
-		
-        public float v_Input = 0f;
-        public float h_Input = 0f;
+      public float r_speed = 50.0f;
 
-	//Score
+           public GameObject weapon;
+      public bool moving = false;
+		
+public float v_Input = 0f;
+      public float h_Input = 0f;
+
+
+	//oe
 	public int m_score=0;
 
 	public GUIStyle scoreStyle;
@@ -32,7 +30,14 @@ public class Player : MonoBehaviour
         
 	void Start()
 	{
-		string text= m_score.ToString();
+
+		//Variables
+		m_speed = 10.0f;
+
+		//Health
+		m_health = 1;
+
+        string text= m_score.ToString();
 		
 		int widthTextOffset= text.Length;
 		
@@ -49,6 +54,13 @@ public class Player : MonoBehaviour
         void Update()
 
         {
+
+
+		if(m_health<=0)
+		{	
+			Destroy(gameObject,3.0f);
+		}
+
         	// Store the input from the player
             v_Input = Input.GetAxis("Vertical");
             h_Input = -Input.GetAxis("Horizontal");
@@ -70,6 +82,8 @@ public class Player : MonoBehaviour
             	r_speed -= Time.deltaTime;
              else
             	r_speed = 50.0f;
+
+			
         }
 
        
@@ -88,6 +102,9 @@ public class Player : MonoBehaviour
 		//width,height,Screen.width-width,height+10
 
 		GUI.Label(m_scoreRect,m_score.ToString(),scoreStyle);
+
+		if(m_health<=0)
+			GUI.Label(new Rect(0,0,30,30),"YOU LOSE",scoreStyle);
 	}
 }
 
