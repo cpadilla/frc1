@@ -81,13 +81,7 @@ public class WorldRenderer : MonoBehaviour {
             float xrandomOffset = getRandomOffset(renderRadius, minSpawnDistance);
             float yrandomOffset = getRandomOffset(renderRadius, minSpawnDistance);
             float zrandomOffset = Mathf.Abs(getRandomOffset(renderRadius, minSpawnDistance));
-
-            if (obj.tag == "Foreground")
-            {
-                obj.transform.Translate(xrandomOffset, yrandomOffset, 0);
-            } 
-            else obj.transform.Translate(xrandomOffset, yrandomOffset, zrandomOffset);
-
+            obj.transform.Translate(xrandomOffset, yrandomOffset, zrandomOffset);
             obj.transform.parent = GameObject.Find("BackgroundContainer").transform;
 
             if (obj.tag == "LargePlanet")
