@@ -24,6 +24,11 @@ public class Asteroid : Unit {
 		transform.Translate(m_velocity*Time.deltaTime);
 
         
+                
+				//Destroy(gameObject);
+            }
+        }
+        
     }
     
     void OnTriggerEnter(Collider collision)
@@ -58,9 +63,6 @@ public class Asteroid : Unit {
 
 	void OnDestroy()
 	{
-		Player.m_score+=100;
-
-
 
 	}
 

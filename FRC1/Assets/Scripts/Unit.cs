@@ -12,9 +12,12 @@ public class Unit : MonoBehaviour {
 	public virtual void Hit()
 	{
 		m_health--;
+                if (m_health<=0)
+                {
+                    Destroy(gameObject);
+                }
 
-		if(m_health<=0)
-			Destroy(this);
+		
 	}
 
 

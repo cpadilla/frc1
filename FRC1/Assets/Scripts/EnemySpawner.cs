@@ -90,14 +90,23 @@ public class EnemySpawner : MonoBehaviour {
 
 	public void RemoveEnemy(int Type, GameObject enemy)
 	{
-		if (Type == 0) {
-			lEnemyOne.Remove(enemy);
-		} 
-		else if (Type == 1) {
-			lEnemyTwo.Remove(enemy);
-		} 
-		else if (Type == 2) {
-			enemyThree = null;
-		}
+            //throw new System.Exception();
+            if (enemy.tag == "Enemy")
+            {
+                Enemy e = enemy.GetComponent<Enemy>();
+                e.ChangeState(2);
+            }
+            if (Type == 0)
+            {
+                lEnemyOne.Remove(enemy);
+            }
+            else if (Type == 1)
+            {
+                lEnemyTwo.Remove(enemy);
+            }
+            else if (Type == 2)
+            {
+                enemyThree = null;
+            }
 	}
 }
