@@ -4,16 +4,14 @@ using System.Collections;
 public class DestroyParticle : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start () 
+	{
+	  Destroy(gameObject,this.particleSystem.startLifetime);
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		if(!this.particleSystem.isPlaying)
-		{
-			Destroy(this.gameObject);
-		}
+	
 	}
 }
