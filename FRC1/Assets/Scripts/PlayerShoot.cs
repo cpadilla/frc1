@@ -65,15 +65,15 @@ public class PlayerShoot : MonoBehaviour
 	private bool []		    topGun_FireType;
 	
 	private GameObject   	nBullet;
-	private float 		 	m_fBulletSpeed = 6.0f;
-	
-	private bool		 	mainGun_stageredFireRight = true;
-	private bool 		 	sideGuns_StageredFireRight = true;
-	
-	private int 		 	sideGunsSpawnersIndex = 0;
-	
-	
-	private bool		 doubleGuns_stagaredFire = false;
+	//private float 		 	m_fBulletSpeed = 6.0f;
+	//
+	//private bool		 	mainGun_stageredFireRight = true;
+	//private bool 		 	sideGuns_StageredFireRight = true;
+	//
+	//private int 		 	sideGunsSpawnersIndex = 0;
+	//
+	//
+	//private bool		 doubleGuns_stagaredFire = false;
 	
 	
 	
@@ -99,7 +99,7 @@ public class PlayerShoot : MonoBehaviour
 		topGun_FireType[1] = false;
 		
 		m_fireRateMult = new float[3];
-		m_fireRateMult[0] = 10f;
+		m_fireRateMult[0] = 3f;
 		m_fireRateMult[1] = 6f;
 		m_fireRateMult[2] = 9f;
 
@@ -194,15 +194,18 @@ public class PlayerShoot : MonoBehaviour
 	private void Fire()
 	{
 
-            //foreach (GameObject gun in allGunSpawners)
-        for (int i = 0; i < 8; i++ )
+        //foreach (GameObject gun in allGunSpawners)
+        for (int i = 3; i < 5; i++ )
         {
             if (isFiring(i))
             {
-                Laser.CreateLaser("PlayerBullet",                   /* tag = "PlayerBullet" */
+
+				{ Laser.CreateLaser("PlayerBullet",                   /* tag = "PlayerBullet" */
                     bulletTypes[currentBulletType],                 /* old bulletTypes[0] */
                     (allGunSpawners[i].transform.position - transform.forward),   /* old (mainGuns[1].transform.position - transform.forward) code*/
-                    transform.rotation);                            /* old transform.rotation */
+                    transform.rotation);
+					m_Timer=0;
+				}/* old transform.rotation */
             }
         }
 

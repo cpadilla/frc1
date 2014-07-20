@@ -39,6 +39,8 @@ public class Enemy : Unit {
 			player = GameObject.Find ("Player");
 		target = player.transform;
 		ChangeState (STATE_SEARCH);
+
+		m_score=100;
 	}
 	
 	void OnTriggerEnter(Collider other)
@@ -46,15 +48,16 @@ public class Enemy : Unit {
 
 		Unit player= (Unit)other.GetComponent<Unit>();
 
-		if(player && player.tag=="Player")
-			player.Hit();
+		//if(player && player.tag=="Player")
+		//	player.Hit();
 
                 if(other.tag == "PlayerBullet")
                 {
-                    Player.m_score += m_score;
+                    //Player.m_score += m_score;
                     //throw new System.Exception();
                 }
-		Hit();
+
+
 	}
 	
     //void OnTriggerEnter(Collision other)

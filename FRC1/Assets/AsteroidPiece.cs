@@ -16,7 +16,6 @@ public class AsteroidPiece : Unit {
 	void OnTriggerEnter(Collider other)
 	{
 
-
 		print (other.name);
 		switch (other.name) {
 		case "EnemyShip":
@@ -25,7 +24,7 @@ public class AsteroidPiece : Unit {
 			break;
 		case "Laser":
 
-			gameObject.GetComponent<Unit>().Hit ();
+			gameObject.GetComponent<Unit>().Hit();
 			break;
 	
 		}

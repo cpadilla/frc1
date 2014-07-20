@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Floating : MonoBehaviour {
+public class Floating : Unit {
 
-	public Vector3 m_velocity;
-	public float m_speed;
 
 	// Use this for initialization
 	void Start () {
@@ -19,22 +17,24 @@ public class Floating : MonoBehaviour {
 			m_speed++;
 
 		m_velocity*=m_speed;
+		tag=("Floating");
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position+=m_velocity*Time.deltaTime;
+		transform.position+= (m_velocity*Time.deltaTime);
+
 	}
 
 	void OnTriggerEnter(Collider trig)
 	{
 		print ("Colliding with piece");
-		Unit unit= trig.GetComponent<Unit>();
+		Unit unit= trig.gameObject.GetComponent<Unit>();
 
-		if(unit)
-			unit.Hit();
 
+		if(trig.gameObject.tag !=("Floating"))
+			Destroy(gameObject);
         //if(trig.gameObject.tag == "Player")
         //    Destroy (gameObject);
 	}

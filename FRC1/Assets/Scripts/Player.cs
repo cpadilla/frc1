@@ -81,15 +81,19 @@ public class Player : Unit
 	//transform.Rotate(Input.GetButton("Up"),90.0f);
 	void OnTriggerEnter(Collider other)
 	{
+		Unit unit= other.GetComponent<Unit>();
+
 		print (other.name);
 		switch (other.name) {
 			case "EnemyShip":
 				//Destroy(other.gameObject);
+			Hit();
+			unit.Hit();
 			break;
 			case "Laser":
 
-			if(other.gameObject.tag!="PlayerProj")
-				Hit ();
+			//if(other.gameObject.tag!="PlayerProj")
+			//	Hit();
 
 			break;
 			case "Powerup":
@@ -97,9 +101,12 @@ public class Player : Unit
 				CollectedPowerup(collected.type);
 				
 			break;
-		case "Astroid_Orig":
-			Destroy(other.gameObject);
-			
+		case "Asteroid_Piece":
+		case"Asteroid_Orig":
+			//Destroy(other.gameObject);
+			Hit();
+
+			unit.Hit();
 			break;
 		}
 	}
