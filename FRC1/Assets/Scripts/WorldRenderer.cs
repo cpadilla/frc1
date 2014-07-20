@@ -28,6 +28,16 @@ public class WorldRenderer : MonoBehaviour {
         // Prefab Offsets
         private float largePlanetOffset = 100.0f;
 
+        // MaxLimits
+        class limit
+        {
+            public limit(int max, int current)
+            { this.Max = max; this.current = current; }
+            public int Max;
+            public int current;
+        }
+        Dictionary<string, limit> numOfObjects = new Dictionary<string, limit>();
+
         private static WorldRenderer _instance;
         private static bool _set = false;
 
@@ -49,8 +59,13 @@ public class WorldRenderer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+            largePlanetOffset = Random.Range(100, 200);
             //for (int i = 0; i < initObjectCount; i++) SpawnObjects();
             Instance = this;
+
+            limit LargePlanets = new limit(8, 0);
+            limit SmallPlanets = new limit(30, 0);
+            limit Debris = new limit(50, 0);
 	}
 	
 	// Update is called once per frame
@@ -105,7 +120,9 @@ public class WorldRenderer : MonoBehaviour {
             {
                 try
                 {
+                    // could optimize this to check before instantiating but we got like an hour left gogogogo
                     obj = (GameObject)Instantiate(prefabs[Random.Range(0, prefabs.Count)], player.transform.position, transform.rotation);
+                    if (TooMany(obj.tag)) obj = null;
                 }
                 catch { }
             }
@@ -128,6 +145,21 @@ public class WorldRenderer : MonoBehaviour {
         {
             if (foreground) foregroundObjects.Add(obj);
             else backgroundObjects.Add(obj);
+        }
+
+        bool TooMany(string tag)
+        {
+            limit l;
+            numOfObjects.TryGetValue(tag, out l);
+            bool mucho = false;
+
+            try // l could be null?
+            {
+                mucho = l.current >= l.Max;
+                if (!mucho) l.current++; // increase the number of those objects if there isn't too many
+            }
+            catch { }
+            return mucho;
         }
 
         //public bool Delete(GameObject obj)
