@@ -4,6 +4,9 @@ using System.Collections;
 public class GameplayUI : MonoBehaviour {
 
 	public GUIText[] enemyCounters;
+	public Texture[] weapons;
+
+	public GUITexture weapon;
 	public GUIText scoreText;
         public int playerScore;
         public int Score
@@ -46,6 +49,11 @@ public class GameplayUI : MonoBehaviour {
 	public void UpdateEnemyCounter(int Index, int amount)
 	{
 		enemyCounters [Index].text = amount.ToString ();
+	}
+
+	public void UpdateWeaponIcon(int Index)
+	{
+		weapon.texture = weapons [Index];
 	}
 
 }
