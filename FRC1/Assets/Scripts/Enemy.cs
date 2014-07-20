@@ -6,6 +6,10 @@ public class Enemy : Unit {
 	public GameObject prefabBullet;
 	public GameObject player;
 
+	//const int TYPE_ONE;
+	//const int TYPE_ONE;
+	//const int TYPE_ONE;
+
 	const int STATE_SEARCH = 0;
 	const int STATE_ATTACK = 1;
 
