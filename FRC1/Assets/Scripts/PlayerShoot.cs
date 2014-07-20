@@ -6,13 +6,15 @@ using System.Collections.Generic;
 public class PlayerShoot : MonoBehaviour 
 {
 	
-	
+	public static PlayerShoot Instance;
 	
 	public GameObject [] 	bulletTypes;
 	public GameObject []	mainGunSpawners;
 	public GameObject []    sideGunsSpawners;
 	public GameObject []	topGunsSpawners;
 	public ParticleSystem 	muzzleFlash;
+	public GameObject		stage2;
+	public GameObject		stage3;
 	public int 				bulletTypesIndex = 0;
 	
 	public int 				ship_FireTypeIndex = 0;
@@ -42,7 +44,8 @@ public class PlayerShoot : MonoBehaviour
 	private bool		 	mainGun_stageredFireRight = true;
 	private bool 		 	sideGuns_StageredFireRight = true;
 	private bool 			topGuns_StageredFireRight = true;
-	
+	private bool			stage2Set = false;
+	private bool 			stage3Set = false;
 	private int 		 	sideGunsSpawnersIndex = 0;
 	
 
@@ -54,7 +57,10 @@ public class PlayerShoot : MonoBehaviour
 
 	
 	
-	
+	void Awake()
+	{
+		Instance = this;
+	}
 	
 	
 	// Use this for initialization
@@ -121,12 +127,16 @@ public class PlayerShoot : MonoBehaviour
 		{
 			ship_FireType[0] = true;
 			ship_FireType[1] = false;
+			stage2.SetActive(false);
 			ship_FireType[2] = false;
+			stage3.SetActive(false);
 		}
 		else if(ship_FireTypeIndex == 1)
 		{
 			ship_FireType[0] = false;
 			ship_FireType[1] = true;
+			stage2.SetActive(true);
+			GameplayUI.getInstance().UpdateWeaponIcon(1);
 			ship_FireType[2] = false;
 		}
 		else
@@ -134,7 +144,9 @@ public class PlayerShoot : MonoBehaviour
 			ship_FireType[0] = false;
 			ship_FireType[1] = false;
 			ship_FireType[2] = true;
-		}		
+			stage3.SetActive(true);
+			GameplayUI.getInstance().UpdateWeaponIcon(2);	
+		}	
 	}
 	
 	private void Fire()
@@ -148,13 +160,13 @@ public class PlayerShoot : MonoBehaviour
 				{
 					if(mainGun_stageredFireRight)
 					{		
-						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[1].transform.position- transform.forward),transform.rotation);
+						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[1].transform.position),transform.rotation);
 						mainGun_stageredFireRight = false;				
                               
 					}
 					else
 					{
-						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[0].transform.position- transform.forward),transform.rotation);
+						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[0].transform.position),transform.rotation);
 						mainGun_stageredFireRight = true;
 						
 					}
@@ -162,8 +174,8 @@ public class PlayerShoot : MonoBehaviour
 				}
 				case 1:
 				{
-					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[1].transform.position - transform.forward),transform.rotation);
-					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[0].transform.position- transform.forward),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[1].transform.position ),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[0].transform.position),transform.rotation);
 					break;
 				}
 			}
@@ -177,7 +189,7 @@ public class PlayerShoot : MonoBehaviour
 				{
 					for(int i = 0; i < sideGunsSpawners.Length;)
 					{
-					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[sideGunsSpawnersIndex].transform.position- transform.forward),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[sideGunsSpawnersIndex].transform.position),transform.rotation);
 						sideGunsSpawnersIndex++;
 						if(sideGunsSpawnersIndex >= 6)
 							sideGunsSpawnersIndex = 0;
@@ -189,17 +201,17 @@ public class PlayerShoot : MonoBehaviour
 				{
 					if(sideGuns_StageredFireRight)
 					{
-					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[0].transform.position- transform.forward),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[0].transform.position),transform.rotation);
 					
-					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[1].transform.position- transform.forward),transform.rotation);
-					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[2].transform.position- transform.forward),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[1].transform.position),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[2].transform.position),transform.rotation);
 						sideGuns_StageredFireRight = false;
 					}
 					else
 					{
-					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[3].transform.position- transform.forward),transform.rotation);
-					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[4].transform.position- transform.forward),transform.rotation);
-					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[5].transform.position- transform.forward),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[3].transform.position),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[4].transform.position),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[5].transform.position),transform.rotation);
 						sideGuns_StageredFireRight = true;
 					}
 					break;
@@ -214,12 +226,12 @@ public class PlayerShoot : MonoBehaviour
 				{
 					if(topGuns_StageredFireRight)
 					{
-					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(topGunsSpawners[1].transform.position- transform.forward),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(topGunsSpawners[1].transform.position),transform.rotation);
 						topGuns_StageredFireRight = false;
 					}
 					else
 					{
-					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(topGunsSpawners[0].transform.position- transform.forward),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(topGunsSpawners[0].transform.position),transform.rotation);
 						topGuns_StageredFireRight = true;
 					}
 					break;
