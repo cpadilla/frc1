@@ -26,8 +26,6 @@ public class Asteroid : Unit {
         
                 
 				//Destroy(gameObject);
-            }
-        }
         
     }
     
