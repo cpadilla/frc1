@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour {
 	//Private
 	List<GameObject> lEnemyOne;
 	List<GameObject> lEnemyTwo;
-	GameObject enemyThree;
+	GameObject enemyThree = null;
 	Transform player;
 
 	//Singleton
@@ -61,7 +61,7 @@ public class EnemySpawner : MonoBehaviour {
 				SpawnEnemy(1);
 				yield return new WaitForSeconds(spawnInterval);
 			}
-			else if(enemyThree)
+			else if(enemyThree = null)
 			{
 				SpawnEnemy(2);
 				yield return new WaitForSeconds(spawnInterval);
@@ -75,16 +75,20 @@ public class EnemySpawner : MonoBehaviour {
 		GameObject newEnemy = (GameObject)Instantiate (enemyPrefabs [index]);
 		newEnemy.transform.position = new Vector3 (player.position.x + Random.Range (-spawnRadiusFromPlayer, spawnRadiusFromPlayer), 
 		                                          player.position.y + Random.Range (-spawnRadiusFromPlayer, spawnRadiusFromPlayer), 0);
-		//newEnemy.transform.parent = transform;
-
+		newEnemy.transform.parent = transform;
+		
 		if (index == 0) {
 			lEnemyOne.Add(newEnemy);
+			GameplayUI.getInstance().UpdateEnemyCounter(index, lEnemyOne.Count);
 		} 
 		else if (index == 1) {
 			lEnemyTwo.Add(newEnemy);
+			GameplayUI.getInstance().UpdateEnemyCounter(index, lEnemyTwo.Count);
 		} 
 		else if (index == 2) {
+			print ("ENEMYadsgdjjdgkl;glkjg;lkadgj;ldkj");
 			enemyThree = newEnemy;
+			GameplayUI.getInstance().UpdateEnemyCounter(index, 1);
 		}
 	}
 
@@ -96,17 +100,23 @@ public class EnemySpawner : MonoBehaviour {
                 Enemy e = enemy.GetComponent<Enemy>();
                 e.ChangeState(2);
             }
+
+			GameplayUI.getInstance().UpdateEnemyCounter(Type, -1);
+		
             if (Type == 0)
             {
                 lEnemyOne.Remove(enemy);
+				GameplayUI.getInstance().UpdateEnemyCounter(Type, lEnemyOne.Count);
             }
             else if (Type == 1)
             {
                 lEnemyTwo.Remove(enemy);
+				GameplayUI.getInstance().UpdateEnemyCounter(Type, lEnemyTwo.Count);
             }
             else if (Type == 2)
             {
                 enemyThree = null;
+				GameplayUI.getInstance().UpdateEnemyCounter(Type, 0);
             }
 	}
 }

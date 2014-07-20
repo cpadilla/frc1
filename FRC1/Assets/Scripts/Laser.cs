@@ -78,7 +78,7 @@ public class Laser :Unit {
 			Destroy(gameObject);
 		}
 
-		if(trigger.GetType() != GetType())
+		if(trigger.gameObject.GetType() != GetType() && trigger.gameObject.GetType() != Player.Instance.GetType())
 		Destroy (gameObject);
 	}
 	//void OnTriggerEnter(Collider trigger)

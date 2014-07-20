@@ -2,28 +2,23 @@
 public class Player : Unit
 {
 
-		//Class Instance 
-		public static Player Instance;
+        //Class Instance 
+        public static Player Instance;
         public static GameObject MainPlayer;
+        public GameObject weapon;
 
         public int Score;
-        public float r_speed = 1000.0f;
-            public GameObject weapon;
-        public bool moving = false;
-		
-        public float v_Input = 0f;
-        public float h_Input = 0f;
-
-	//Score over time
-	public int scoreOT=10;
+	public int scoreOT=10; //Score over time
 	public float scoreTimer=0.0f;
-
 	//oe
 	public static int m_score=0;
-
 	public GUIStyle scoreStyle;
-
 	public Rect m_scoreRect;
+
+        public float r_speed = 1000.0f;
+         
+        public float m_drag = -1.0f;        public float v_Input = 0f;        public float h_Input = 0f;            public bool moving = false;
+
 
         // Use this for initialization
     void Awake()
@@ -35,6 +30,8 @@ public class Player : Unit
         
 	void Start()
 	{
+		//Velocity
+	
 
 		//Variables
 		m_speed = 1000.0f;
@@ -97,7 +94,7 @@ public class Player : Unit
 		Unit unit= other.GetComponent<Unit>();
 
 		print (other.tag);
-		switch (other.name) {
+		switch (other.tag) {
 			case "Enemy":
 				//Destroy(other.gameObject);
 			Hit();
@@ -143,7 +140,7 @@ public class Player : Unit
 	{
 		//width,height,Screen.width-width,height+10
 
-		GUI.Label(m_scoreRect,m_score.ToString(),scoreStyle);
+		//GUI.Label(m_scoreRect,m_score.ToString(),scoreStyle);
 
 		if(m_health<=0)
 			GUI.Label(new Rect(0,0,30,30),"YOU LOSE",scoreStyle);
