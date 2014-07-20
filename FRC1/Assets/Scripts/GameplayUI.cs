@@ -24,12 +24,18 @@ public class GameplayUI : MonoBehaviour {
 
 	private static GameplayUI instance;
 
-	public GameplayUI getInstance()
+	public static GameplayUI getInstance()
+	{
+		return instance;
+	}
+
+	void Awake()
 	{
 		if (instance == null)
 			instance = this;
+		else
+			Destroy(gameObject);
 
-		return instance;
 	}
 
         void Update()
