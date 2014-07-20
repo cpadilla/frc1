@@ -9,11 +9,9 @@ public class Unit : MonoBehaviour {
 	public float m_rotation;
 
 
-	public virtual void Hit()
+	public void Hit()
 	{
 		m_health-=1;
-		if(m_health <= 0)
-			Destroy(gameObject);
 
 	}
 
