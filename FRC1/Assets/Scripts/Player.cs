@@ -1,15 +1,16 @@
 ﻿using UnityEngine; using System.Collections; 
 public class Player : Unit
 {
+	//Class Instance 
+	public static Player Instance;
+	public static GameObject MainPlayer;
+	public GameObject weapon;
 
 	//Boolean
 	public bool isAlive;
 	public GameObject soundDummy;
 
-    //Class Instance 
-    public static Player Instance;
-    public static GameObject MainPlayer;
-    public GameObject weapon;
+    
 
     public int Score;
 	public int scoreOT=10; //Score over time
@@ -81,7 +82,8 @@ public class Player : Unit
 	    // translate the input read from player this iteration 
 	    transform.Rotate(0,0, h_Input * Time.deltaTime * r_speed);
 	    transform.Translate(0, v_Input * Time.deltaTime * m_speed, 0);
-	    
+	   
+
 	    if(v_Input == 0)
 	       	m_speed -= Time.deltaTime * .5f;
 	    else
@@ -99,45 +101,44 @@ public class Player : Unit
 	//transform.Rotate(Input.GetButton("Up"),90.0f);
 	void OnTriggerEnter(Collider other)
 	{
-		Unit unit= other.GetComponent<Unit>();
 
 		print (other.tag);
 		switch (other.tag) {
 			case "Enemy":
-				//Destroy(other.gameObject);
-			Hit();
-			unit.Hit();
+				Hit();
 			break;
 			case "Laser":
-
-			//if(other.gameObject.tag!="PlayerProj")
-			//	Hit();
+				//if(other.gameObject.tag!="PlayerProj")
+				//	Hit();
 
 			break;
 			case "Powerup":
 				Powerup collected = other.GetComponent<Powerup>();
 				CollectedPowerup(collected.type);
-				
+				collected.OnCollected();
 			break;
 		case "Floating":
 			//Destroy(other.gameObject);
-			Hit();
-
-			unit.Hit();
+				Hit();
 			break;
 		}
+
 	}
 
 	void CollectedPowerup(int type)
 	{
+		print ("Collected Powerup " + type.ToString ());
 		switch (type) {
 			case Powerup.TYPE_LASER:
 
 			break;
-			case Powerup.TYPE_BURST:
+			case Powerup.TYPE_BULLET:
 			
 			break;
-			case Powerup.TYPE_RAPID:
+			case Powerup.TYPE_ARMOR:
+			
+			break;
+			case Powerup.TYPE_ARMORTWO:
 			
 			break;
 		}

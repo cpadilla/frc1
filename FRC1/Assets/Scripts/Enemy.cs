@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Enemy : Unit {
 
+	public GameObject[] powerupPrefabs;
 	public GameObject prefabBullet;
 	private GameObject player;
 
@@ -18,6 +19,7 @@ public class Enemy : Unit {
 	public float m_range = 5f;
 	public float rotate_rate = 20;
 	public float rangeFromPlayer = 10; 
+	public int   powerupDropChance = 100;
 
 	public GameObject soundExplosionDummy;
 
@@ -106,7 +108,7 @@ public class Enemy : Unit {
 	public void ChangeState(int NEW_STATE)
 	{
 		m_state = NEW_STATE;
-	    print("New State " + m_state.ToString());
+	    //print("New State " + m_state.ToString());
 	    switch (m_state)
 	    {
 	        case STATE_SEARCH:
@@ -149,7 +151,8 @@ public class Enemy : Unit {
 		GameObject bullet = (GameObject)Instantiate (prefabBullet, transform.position + transform.forward * 5, transform.rotation);
 		//bullet.GetComponent<Laser>().
 	}
-	private bool isQuitting = false; void OnApplicationQuit() { isQuitting = true; }
+	private bool isQuitting = false; 
+	void OnApplicationQuit() { isQuitting = true; }
 
 	override public void Hit()
 	{
@@ -159,13 +162,29 @@ public class Enemy : Unit {
 	}
 	void OnDestroy()
 	{
+		StopAllCoroutines ();
 		//EnemySpawner.getInstance ().RemoveEnemy (m_typeIndex, gameObject);
-		//Player play= player.GetComponent<Player>();
-		if (!isQuitting) {
-						Instantiate (enemyDead, this.transform.position, this.transform.rotation);
-						enemyDead.Play ();
-				}
+		Player play = player.GetComponent<Player>();
+		if (!isQuitting && player != null) {
+			Instantiate (enemyDead, this.transform.position, this.transform.rotation);
+			enemyDead.Play ();
+
+			print ("CHance " + powerupDropChance.ToString());
+			int chance = Random.Range(0, 100);
+			if(chance < powerupDropChance)
+				SpawnPowerup();
+
+			
+
+		}
 		Instantiate(soundExplosionDummy,this.transform.position,transform.rotation);
 		Player.m_score+=m_score;
+	}
+
+	void SpawnPowerup()
+	{
+		print ("Spawn Powerup");
+		int type = Random.Range (0, 1);
+		Instantiate (powerupPrefabs [type], transform.position, Quaternion.identity);
 	}
 }
