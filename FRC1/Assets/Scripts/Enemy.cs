@@ -18,6 +18,8 @@ public class Enemy : Unit {
 	public float m_range = 5f;
 	public float rotate_rate = 20;
 
+	public GameObject soundExplosionDummy;
+
 	bool isReadyToFire = true;
 
 	//Score to player
@@ -195,11 +197,17 @@ public class Enemy : Unit {
 		//bullet.GetComponent<Laser>().
 	}
 
+	override public void Hit()
+	{
+	
+		base.Hit();
+	}
 	void OnDestroy()
 	{
 		//EnemySpawner.getInstance ().RemoveEnemy (m_typeIndex, gameObject);
-		Player play= player.GetComponent<Player>();
+		//Player play= player.GetComponent<Player>();
 
+		Instantiate(soundExplosionDummy,this.transform.position,transform.rotation);
 		Player.m_score+=m_score;
 
 

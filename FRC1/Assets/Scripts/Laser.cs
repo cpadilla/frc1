@@ -7,6 +7,12 @@ public class Laser :Unit {
 
 	public Vector2 velocity;
 
+	public string soundStamp;
+
+	public AudioClip[] shootSFX;
+
+	public AudioSource[] sources;
+
 
 	//Not every frame
 
@@ -24,11 +30,25 @@ public class Laser :Unit {
 
 	// Use this for initialization
 	void Start () {
-		gameObject.name = "Laser";
+		//gameObject.name = "Laser";
 		transform.parent = GameObject.Find ("LaserContainer").transform;
 		Destroy( gameObject, m_lifeTime);
-
-
+		
+		//Random i
+		int i =Random.Range(0,shootSFX.Length);
+		
+		if(sources[0].isPlaying)
+		{
+			sources[1].clip= shootSFX[i];
+			sources[1].Play();
+		}
+		
+		else
+		{
+			sources[0].clip= shootSFX[i];
+			sources[0].Play();
+		}
+		
 	}
 	
 	// Update is called once per frame

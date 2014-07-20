@@ -45,9 +45,13 @@ public class PlayerShoot : MonoBehaviour
 	
 	private int 		 	sideGunsSpawnersIndex = 0;
 	
-	
-	
-	
+
+
+	public AudioClip[] shootSFX;
+	public List<AudioSource> sources;
+
+	public int sfxCount=0;
+
 	
 	
 	// Use this for initialization
@@ -76,6 +80,7 @@ public class PlayerShoot : MonoBehaviour
 		m_fireRateMult[1] = 6f;
 		m_fireRateMult[2] = 9f;
 
+
         }
 	
 	// Update is called once per frame
@@ -86,8 +91,25 @@ public class PlayerShoot : MonoBehaviour
                 // If player shoots
         if(Input.GetMouseButton(0) && m_Timer >=  m_fireRate)
         {
-				Fire ();
-				m_Timer = 0;
+			Fire ();
+			m_Timer = 0;
+				
+		////Random i
+		//int i =Random.Range(0,shootSFX.Length);
+		//
+		//if(sources[0].isPlaying)
+		//{
+		//	sources[1].clip= shootSFX[i];
+		//	sources[1].Play();
+		//}
+		//
+		//else
+		//{
+		//	sources[0].clip= shootSFX[i];
+		//	sources[0].Play();
+		//}
+		//
+		
 		}	
 
 		Testing();

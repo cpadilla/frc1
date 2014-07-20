@@ -13,14 +13,7 @@ public class PlayButton : MonoBehaviour {
 	
         void Update () 
         {
-            if(Input.GetMouseButtonDown(0))  // if get mouse down or touch count != 0 same call 
-            {
-                m_rRay = Camera.main.ScreenPointToRay(Input.mousePosition); // set the ray at that position to world space
-                if(Physics.Raycast(m_rRay,out m_rcHit))  // if it hit something collect that data
-                {
-                    Application.LoadLevel(1);
-                }
-            }
+
         }
 
 }
