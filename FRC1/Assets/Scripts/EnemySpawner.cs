@@ -75,7 +75,7 @@ public class EnemySpawner : MonoBehaviour {
 		GameObject newEnemy = (GameObject)Instantiate (enemyPrefabs [index]);
 		newEnemy.transform.position = new Vector3 (player.position.x + Random.Range (-spawnRadiusFromPlayer, spawnRadiusFromPlayer), 
 		                                          player.position.y + Random.Range (-spawnRadiusFromPlayer, spawnRadiusFromPlayer), 0);
-		newEnemy.transform.parent = transform;
+		//newEnemy.transform.parent = transform;
 
 		if (index == 0) {
 			lEnemyOne.Add(newEnemy);

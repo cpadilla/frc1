@@ -83,9 +83,9 @@ public class Player : Unit
 	{
 		Unit unit= other.GetComponent<Unit>();
 
-		print (other.name);
+		print (other.tag);
 		switch (other.name) {
-			case "EnemyShip":
+			case "Enemy":
 				//Destroy(other.gameObject);
 			Hit();
 			unit.Hit();
@@ -101,8 +101,7 @@ public class Player : Unit
 				CollectedPowerup(collected.type);
 				
 			break;
-		case "Asteroid_Piece":
-		case"Asteroid_Orig":
+		case "Floating":
 			//Destroy(other.gameObject);
 			Hit();
 
