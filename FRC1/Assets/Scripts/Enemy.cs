@@ -12,7 +12,7 @@ public class Enemy : Unit {
 	int m_typeIndex = 0; 
 	int m_state = 0;
 
-	public float m_search_distance = 15f;
+	public float m_search_distance = 150f;
 	public float m_rof = .5f; 				//rate of fire
 	public float m_range = 5f;
 	public float rotate_rate = 20;
