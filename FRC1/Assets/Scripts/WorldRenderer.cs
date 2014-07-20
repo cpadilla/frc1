@@ -76,6 +76,8 @@ public class WorldRenderer : MonoBehaviour {
             {
                 GameObject obj = getNextSpawnObject();
                 if (obj.GetComponent("Enemy") != null) foregroundObjects.Add(obj);
+                else if (obj.GetComponent("Asteroid") != null) foregroundObjects.Add(obj);
+                else if (obj.GetComponent("Floating") != null) foregroundObjects.Add(obj);
                 else backgroundObjects.Add(obj);
                 spawnTimer = 0;
             }
@@ -120,6 +122,12 @@ public class WorldRenderer : MonoBehaviour {
             }
 
             return obj;
+        }
+
+        public void AddObject(GameObject obj, bool foreground)
+        {
+            if (foreground) foregroundObjects.Add(obj);
+            else backgroundObjects.Add(obj);
         }
 
         //public bool Delete(GameObject obj)
