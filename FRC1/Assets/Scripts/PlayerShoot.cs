@@ -41,6 +41,7 @@ public class PlayerShoot : MonoBehaviour
 	
 	private bool		 	mainGun_stageredFireRight = true;
 	private bool 		 	sideGuns_StageredFireRight = true;
+	private bool 			topGuns_StageredFireRight = true;
 	
 	private int 		 	sideGunsSpawnersIndex = 0;
 	
@@ -122,13 +123,13 @@ public class PlayerShoot : MonoBehaviour
 				{
 					if(mainGun_stageredFireRight)
 					{		
-						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[0].transform.position),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[1].transform.position- transform.forward),transform.rotation);
 						mainGun_stageredFireRight = false;
                               
 					}
 					else
 					{
-						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[0].transform.position),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(mainGunSpawners[0].transform.position- transform.forward),transform.rotation);
 						mainGun_stageredFireRight = true;
 					}
 					 break;
@@ -150,7 +151,7 @@ public class PlayerShoot : MonoBehaviour
 				{
 					for(int i = 0; i < sideGunsSpawners.Length;)
 					{
-						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[sideGunsSpawnersIndex].transform.position),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[sideGunsSpawnersIndex].transform.position- transform.forward),transform.rotation);
 						sideGunsSpawnersIndex++;
 						if(sideGunsSpawnersIndex >= 6)
 							sideGunsSpawnersIndex = 0;
@@ -162,23 +163,42 @@ public class PlayerShoot : MonoBehaviour
 				{
 					if(sideGuns_StageredFireRight)
 					{
-						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[0].transform.position),transform.rotation);
-						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[1].transform.position),transform.rotation);
-						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[2].transform.position),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[0].transform.position),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[1].transform.position),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[2].transform.position),transform.rotation);
 						sideGuns_StageredFireRight = false;
 					}
 					else
 					{
-						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[3].transform.position),transform.rotation);
-						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[4].transform.position),transform.rotation);
-						nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[5].transform.position),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[3].transform.position),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[4].transform.position),transform.rotation);
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(sideGunsSpawners[5].transform.position),transform.rotation);
 						sideGuns_StageredFireRight = true;
 					}
 					break;
 				}
 			}
 		}
-		// third gun here 
+		else if(ship_FireTypeIndex == 2)
+		{
+			switch(topGunFireTypeIndex)
+			{
+				case 0:
+				{
+					if(topGuns_StageredFireRight)
+					{
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(topGunsSpawners[1].transform.position- transform.forward),transform.rotation);
+						topGuns_StageredFireRight = false;
+					}
+					else
+					{
+					nBullet= (GameObject)Instantiate(bulletTypes[bulletTypesIndex],(topGunsSpawners[0].transform.position- transform.forward),transform.rotation);
+						topGuns_StageredFireRight = true;
+					}
+					break;
+				}
+			}
+		}
 		
         
 	}
@@ -187,19 +207,19 @@ public class PlayerShoot : MonoBehaviour
 	
 	private void Testing()
 	{
-		if(Input.GetKeyDown(KeyCode.B))
+		if(Input.GetKeyDown(KeyCode.V))
 		{
-			if(ship_FireTypeIndex == 0)
-			{
-				ship_FireTypeIndex = 1;
-			}
-			else
-			{
+			ship_FireTypeIndex++;
+			
+			if(ship_FireTypeIndex > 2)
 				ship_FireTypeIndex = 0;
+			else if(ship_FireTypeIndex < 0)
+			{
+				ship_FireTypeIndex = 2;
 			}
 		}
 		
-		if(Input.GetKeyDown(KeyCode.N))
+		else if(Input.GetKeyDown(KeyCode.B))
 		{
 			if(mainGunFireTypeIndex == 0)
 			{
@@ -211,6 +231,42 @@ public class PlayerShoot : MonoBehaviour
 			}
 		}
 		
+	  else if(Input.GetKeyDown(KeyCode.M))
+		{
+			if(sideGun_FireTypeIndex == 0)
+			{
+				sideGun_FireTypeIndex = 1;
+			}
+			else
+			{
+				sideGun_FireTypeIndex = 0;
+			}
+		}
+		
+		else if(Input.GetKeyDown(KeyCode.N))
+		{
+			if(topGunFireTypeIndex == 0)
+			{
+				topGunFireTypeIndex = 1;
+			}
+			else
+			{
+				topGunFireTypeIndex = 0;
+			}
+		}
+		
+		else if(Input.GetKeyDown(KeyCode.Comma))
+		{
+			if(bulletTypesIndex == 0)
+			{
+				bulletTypesIndex = 1;
+			}
+			else
+			{
+				bulletTypesIndex = 0;
+			}
+		}		
+	
 		else if (Input.GetKeyDown(KeyCode.Alpha0))
 		{
 			m_fireRateIndex  = 0;
