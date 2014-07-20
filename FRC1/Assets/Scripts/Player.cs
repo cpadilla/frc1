@@ -92,7 +92,7 @@ public class Player : Unit
 		Unit unit= other.GetComponent<Unit>();
 
 		print (other.tag);
-		switch (other.name) {
+		switch (other.tag) {
 			case "Enemy":
 				//Destroy(other.gameObject);
 			Hit();
@@ -138,7 +138,7 @@ public class Player : Unit
 	{
 		//width,height,Screen.width-width,height+10
 
-		GUI.Label(m_scoreRect,m_score.ToString(),scoreStyle);
+		//GUI.Label(m_scoreRect,m_score.ToString(),scoreStyle);
 
 		if(m_health<=0)
 			GUI.Label(new Rect(0,0,30,30),"YOU LOSE",scoreStyle);
