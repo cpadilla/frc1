@@ -6,22 +6,18 @@ public class Enemy : Unit {
 	public GameObject prefabBullet;
 	public GameObject player;
 
-	//const int TYPE_ONE;
-	//const int TYPE_ONE;
-	//const int TYPE_ONE;
-
 	const int STATE_SEARCH = 0;
 	const int STATE_ATTACK = 1;
 
+	int m_typeIndex = 0; 
 	int m_state = 0;
+
 	public float m_search_distance = 15f;
 	public float m_rof = .5f; 				//rate of fire
 	public float m_range = 5f;
-
 	public float rotate_rate = 20;
 
 	bool isReadyToFire = true;
-
 
 	//Score to player
 	public float m_score;
@@ -33,18 +29,19 @@ public class Enemy : Unit {
 		m_health = 1;
 		m_speed = 10;
 
-		//target = player.transform;
-		ChangeState (STATE_SEARCH);
-
 		gameObject.name = "EnemyShip";
 	}
-
-        void Start()
-        {
-        }
-
+	void Start()
+	{
+		if(player == null)
+			player = GameObject.Find ("Player");
+		target = player.transform;
+		ChangeState (STATE_SEARCH);
+	}
+	
 	void OnTriggerEnter(Collider other)
 	{
+
 		Unit player= (Unit)other.GetComponent<Unit>();
 
 		if(player && player.tag=="Player")
@@ -54,17 +51,17 @@ public class Enemy : Unit {
 	}
 	float GetDistance()
 	{
-            try
-            {
-                target = player.transform;
-                float val = Mathf.Abs (Vector3.Distance (transform.position, target.position)); 
-                //print (val);
-                return val;
-            }
-            catch (System.Exception)
-            {
-                return 0.0f;
-            }
+	    try
+	    {
+	        target = player.transform;
+	        float val = Mathf.Abs (Vector3.Distance (transform.position, target.position)); 
+	        //print (val);
+	        return val;
+	    }
+	    catch (System.Exception)
+	    {
+	        return 0.0f;
+	    }
 	}
 
 	IEnumerator CR_SEARCH()
