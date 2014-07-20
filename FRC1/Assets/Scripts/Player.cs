@@ -32,7 +32,7 @@ public float v_Input = 0f;
 	{
 
 		//Variables
-		m_speed = 10.0f;
+		m_speed = 100.0f;
 
 		//Health
 		m_health = 1;

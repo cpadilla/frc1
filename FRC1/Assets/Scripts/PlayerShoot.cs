@@ -59,6 +59,7 @@ public class PlayerShoot : MonoBehaviour {
 			if(mainGun_stageredFireRight)
 			{		
 				nBullet= (GameObject)Instantiate(bulletTypes[0],(mainGuns[1].transform.position - transform.forward),transform.rotation);
+                                nBullet.tag = "PlayerBullet";
 				nBullet.GetComponent<Laser>().owner= gameObject;
 
 				mainGun_stageredFireRight = false;

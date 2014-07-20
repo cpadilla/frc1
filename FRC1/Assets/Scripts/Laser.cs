@@ -32,6 +32,6 @@ public class Laser :Unit {
 		if(unit && unit.tag!= ("Player"))
 			unit.Hit();
 
-		Destroy (gameObject);
+		//Destroy (gameObject);
 	}
 }
