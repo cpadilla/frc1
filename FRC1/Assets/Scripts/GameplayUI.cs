@@ -13,7 +13,6 @@ public class GameplayUI : MonoBehaviour {
 		if (instance == null)
 			instance = new GameplayUI ();
 
-
 		return instance;
 	}
 
