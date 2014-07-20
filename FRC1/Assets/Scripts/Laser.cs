@@ -7,13 +7,12 @@ public class Laser :Unit {
 
 	public Vector2 velocity;
 
+	public GameObject owner;
+
 
 	// Use this for initialization
 	void Start () {
-		gameObject.name = "Laser";
-		transform.parent = GameObject.Find ("LaserContainer").transform;
 		Destroy( gameObject, m_lifeTime);
-
 
 	}
 	
@@ -27,19 +26,12 @@ public class Laser :Unit {
 
 	void OnTriggerEnter(Collider trigger)
 	{
+		print (trigger.name);
 		Unit unit=trigger.gameObject.GetComponent<Unit>();
+
 		if(unit && unit.tag!= ("Player"))
 			unit.Hit();
 
-		Destroy (this.gameObject);
+		Destroy (gameObject);
 	}
 }
-
-
-//1E 10E
-//2E 3
-//3E 1
-
-//Laser
-//rapidfire
-//bu

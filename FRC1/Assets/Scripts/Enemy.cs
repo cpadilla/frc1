@@ -9,15 +9,15 @@ public class Enemy : Unit {
 	const int STATE_SEARCH = 0;
 	const int STATE_ATTACK = 1;
 
-	int m_typeIndex = 0; 
 	int m_state = 0;
-
-	public float m_search_distance = 150f;
+	public float m_search_distance = 15f;
 	public float m_rof = .5f; 				//rate of fire
 	public float m_range = 5f;
+
 	public float rotate_rate = 20;
 
 	bool isReadyToFire = true;
+
 
 	//Score to player
 	public float m_score;
@@ -29,39 +29,29 @@ public class Enemy : Unit {
 		m_health = 1;
 		m_speed = 10;
 
+		//target = player.transform;
+		ChangeState (STATE_SEARCH);
+
 		gameObject.name = "EnemyShip";
 	}
-	void Start()
-	{
-		if(player == null)
-			player = GameObject.Find ("Player");
-		target = player.transform;
-		ChangeState (STATE_SEARCH);
-	}
-	
-	void OnTriggerEnter(Collider other)
-	{
 
-		Unit player= (Unit)other.GetComponent<Unit>();
+        void Start()
+        {
+        }
 
-		if(player && player.tag=="Player")
-			player.Hit();
-
-		Hit();
-	}
 	float GetDistance()
 	{
-	    try
-	    {
-	        target = player.transform;
-	        float val = Mathf.Abs (Vector3.Distance (transform.position, target.position)); 
-	        //print (val);
-	        return val;
-	    }
-	    catch (System.Exception)
-	    {
-	        return 0.0f;
-	    }
+            try
+            {
+                target = player.transform;
+                float val = Mathf.Abs (Vector3.Distance (transform.position, target.position)); 
+                //print (val);
+                return val;
+            }
+            catch (System.Exception)
+            {
+                return 0.0f;
+            }
 	}
 
 	IEnumerator CR_SEARCH()
@@ -83,6 +73,9 @@ public class Enemy : Unit {
 	IEnumerator CR_ATTACK()
 	{
 		float distance;
+		//if(m_health<=0)
+		//	Destroy(gameObject);
+
 		while (m_health > 0 ) 
 		{
 			distance = GetDistance();
@@ -150,5 +143,11 @@ public class Enemy : Unit {
 
 		GameObject bullet = (GameObject)Instantiate (prefabBullet, transform.position + transform.forward * 5, transform.rotation);
 		//bullet.GetComponent<Laser>().
+	}
+
+	void OnDestroy()
+	{
+
+
 	}
 }

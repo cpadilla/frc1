@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Floating : MonoBehaviour {
+public class Floating : Unit {
+
 
 	// Use this for initialization
 	void Start () {
@@ -15,12 +16,6 @@ public class Floating : MonoBehaviour {
 
 	void OnTriggerEnter(Collider trig)
 	{
-		Unit unit= trig.GetComponent<Unit>();
-
-		if(unit)
-			unit.Hit();
-
-		if(trig.gameObject.tag == "Player")
-			Destroy (gameObject);
+		print ("I am colliding!");
 	}
 }

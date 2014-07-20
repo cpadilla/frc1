@@ -14,19 +14,14 @@ public class WorldRenderer : MonoBehaviour {
         public List<GameObject> backgroundObjects;
         public List<GameObject> prefabs;
 
-        // World Renderer
         public float renderRadius = 400.0f;
         private float minSpawnDistance = 3.0f;
         private int maxObjectCount = 30;
         private int initObjectCount = 3;
 
-        // spawn timer
         private float spawnTimer = 0.0f;
         private float spawnRate = 100.0f;
-        private float spawnInterval = 10.0f;
-
-        // Prefab Offsets
-        private float largePlanetOffset = 100.0f;
+        private float spawnInterval = 100.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -35,10 +30,9 @@ public class WorldRenderer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-            spawnTimer += spawnRate;
+            spawnTimer += Time.deltaTime * spawnRate;
             // if it's time to respawn
             SpawnObjects();
-            DelteFarObjects();
         }
         
         // Gets an appropriate offset for the world object
@@ -52,43 +46,25 @@ public class WorldRenderer : MonoBehaviour {
         void SpawnObjects()
         {
             // if it's time to spawn objects and there is a need for objects
-            if (spawnTimer > spawnInterval && backgroundObjects.Count <= maxObjectCount)
+            if (spawnTimer > Time.deltaTime * spawnInterval && backgroundObjects.Count <= maxObjectCount)
             {
                 GameObject obj = getNextSpawnObject();
                 if (obj.GetComponent("Enemy") != null) foregroundObjects.Add(obj);
+				else if (obj.GetComponent("Asteroid") != null) foregroundObjects.Add(obj);
                 else backgroundObjects.Add(obj);
-                spawnTimer = 0;
-            }
-        }
-
-        void DelteFarObjects()
-        {
-            for (int i = backgroundObjects.Count - 1; i >= 0; i--)
-            {
-                GameObject obj = backgroundObjects[i];
-                if (Vector3.Distance(player.transform.position, obj.transform.position) > renderRadius)
-                {
-                    backgroundObjects.RemoveAt(i);
-                    Destroy( obj );
-                }
             }
         }
 
         GameObject getNextSpawnObject()
         {
-            GameObject obj = (GameObject)Instantiate(prefabs[Random.Range(0, prefabs.Count)], player.transform.position, transform.rotation);
+			
+		//if(obj)
+			GameObject obj = (GameObject)Instantiate(prefabs[Random.Range(0, prefabs.Count)], player.transform.position, transform.rotation);
             // get random position for object
             float xrandomOffset = getRandomOffset(renderRadius, minSpawnDistance);
             float yrandomOffset = getRandomOffset(renderRadius, minSpawnDistance);
             float zrandomOffset = Mathf.Abs(getRandomOffset(renderRadius, minSpawnDistance));
             obj.transform.Translate(xrandomOffset, yrandomOffset, zrandomOffset);
-            obj.transform.parent = GameObject.Find("BackgroundContainer").transform;
-
-            if (obj.tag == "LargePlanet")
-            {
-                obj.transform.Translate(0, 0, largePlanetOffset);
-            }
-
             return obj;
         }
 }
