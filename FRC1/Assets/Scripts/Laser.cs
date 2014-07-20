@@ -37,12 +37,51 @@ public class Laser :Unit {
 		transform.position += transform.up * Time.deltaTime*m_speed;
 	}
 
+	void OnCollisionEnter(Collision trigger)
+	{
+		Unit unit=trigger.gameObject.GetComponent<Unit>();
+		if(unit && (unit.tag!= ("Player") || unit.name == "Player"))
+			unit.Hit();
+
+		if(unit && (unit.tag!= ("Enemy")|| unit.name == "Enemy") && tag == "PlayerBullet")
+                {
+                    Player.m_score++;
+                    unit.Hit();
+                }
+                else
+		if(unit && (unit.tag!= ("Enemy")|| unit.name == "Enemy"))
+                {
+                    Player.m_score += (int)unit.m_speed;
+                    unit.Hit();
+                }
+		//Destroy (gameObject);
+	}
 	void OnTriggerEnter(Collider trigger)
 	{
 		Unit unit=trigger.gameObject.GetComponent<Unit>();
-		if(unit && unit.tag!= ("Player"))
-			unit.Hit();
+        //if(unit && unit.tag!= ("Player"))
+        //    unit.Hit();
 
+        //if(unit && unit.tag!= ("Enemy"))
+        //        {
+        //            Player.m_score += (int)unit.m_speed;
+        //            unit.Hit();
+        //        }
+
+                if (unit)
+                {
+                    switch (unit.tag)
+                    {
+                        case "Enemy":
+                            if (tag == "PlayerBullet")
+                            {
+                                Enemy e = unit as Enemy;
+                                int enemytype = e.m_typeIndex;
+                                EnemySpawner.getInstance().RemoveEnemy(enemytype, unit.gameObject);
+                            }
+                            break;
+                    }
+                }
 		//Destroy (gameObject);
 	}
 }

@@ -33,7 +33,7 @@ public class Asteroid : Unit {
 				}
         
                 
-				Destroy(gameObject);
+				//Destroy(gameObject);
             }
         }
         
@@ -51,9 +51,6 @@ public class Asteroid : Unit {
 
 	void OnDestroy()
 	{
-		Player.m_score+=100;
-
-
 
 	}
 

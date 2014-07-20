@@ -122,11 +122,11 @@ public class WorldRenderer : MonoBehaviour {
             return obj;
         }
 
-        public bool Delete(GameObject obj)
-        {
-            bool del = false;
-            del = foregroundObjects.Remove(obj);
-            Destroy(obj);
-            return del;
-        }
+        //public bool Delete(GameObject obj)
+        //{
+        //    bool del = false;
+        //    del = foregroundObjects.Remove(obj);
+        //    Destroy(obj);
+        //    return del;
+        //}
 }

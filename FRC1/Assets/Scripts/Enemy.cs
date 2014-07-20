@@ -4,12 +4,13 @@ using System.Collections;
 public class Enemy : Unit {
 
 	public GameObject prefabBullet;
-	public GameObject player;
+	private GameObject player;
 
 	const int STATE_SEARCH = 0;
 	const int STATE_ATTACK = 1;
+	const int STATE_DESTROYED = 2;
 
-	int m_typeIndex = 0; 
+	public int m_typeIndex = 0; 
 	int m_state = 0;
 
 	public float m_search_distance = 150f;
@@ -20,7 +21,7 @@ public class Enemy : Unit {
 	bool isReadyToFire = true;
 
 	//Score to player
-	public float m_score;
+	public int m_score;
 
 	public static Transform target;
 
@@ -30,6 +31,7 @@ public class Enemy : Unit {
 		m_speed = 10;
 
 		gameObject.name = "EnemyShip";
+                player = Player.Instance.gameObject;
 	}
 	void Start()
 	{
@@ -47,8 +49,27 @@ public class Enemy : Unit {
 		if(player && player.tag=="Player")
 			player.Hit();
 
+                if(other.tag == "PlayerBullet")
+                {
+                    Player.m_score += m_score;
+                    //throw new System.Exception();
+                }
 		Hit();
 	}
+	
+    //void OnTriggerEnter(Collision other)
+    //{
+
+    //            if(other.gameObject.tag == "PlayerBullet")
+    //            {
+    //                Player.m_score += m_score;
+    //                throw new System.Exception();
+    //            }
+    //    Hit();
+    //}
+
+
+
 	float GetDistance()
 	{
 	    try
@@ -106,19 +127,38 @@ public class Enemy : Unit {
 		ChangeState (STATE_SEARCH);
 	}
 
-	void ChangeState(int NEW_STATE)
+        //void Update()
+        //{
+        //switch (m_state) {
+        //    case STATE_SEARCH:
+        //        //StartCoroutine("CR_SEARCH");
+        //                        CR_SEARCH();
+        //    break;
+
+        //    case STATE_ATTACK:
+        //        //StartCoroutine("CR_ATTACK");
+        //                        CR_ATTACK();
+        //    break;
+        //}
+        //}
+
+	public void ChangeState(int NEW_STATE)
 	{
 		m_state = NEW_STATE;
-		//print ("New State " + m_state.ToString ());
-		switch (m_state) {
-			case STATE_SEARCH:
-				StartCoroutine("CR_SEARCH");
-			break;
+            print("New State " + m_state.ToString());
+            switch (m_state)
+            {
+                case STATE_SEARCH:
+                    StartCoroutine("CR_SEARCH");
+                    break;
 
-			case STATE_ATTACK:
-				StartCoroutine("CR_ATTACK");
-			break;
-		}
+                case STATE_ATTACK:
+                    StartCoroutine("CR_ATTACK");
+                    break;
+                case STATE_DESTROYED:
+                    StopAllCoroutines();
+                    break;
+            }
 	}
 
 	void OnGUI()
@@ -154,6 +194,6 @@ public class Enemy : Unit {
 
 	void OnDestroy()
 	{
-		EnemySpawner.getInstance ().RemoveEnemy (m_typeIndex, gameObject);
+		//EnemySpawner.getInstance ().RemoveEnemy (m_typeIndex, gameObject);
 	}
 }

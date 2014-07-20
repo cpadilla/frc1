@@ -151,9 +151,9 @@ public class PlayerShoot : MonoBehaviour
 	void Update () 
 	{
 		m_Timer += Time.deltaTime * m_fireRateMult[m_fireRateIndex];
-		
+
                 // If player shoots
-				if(Input.GetMouseButton(0) && m_Timer >=  m_fireRate)
+                if(Input.GetMouseButton(0) && m_Timer >=  m_fireRate)
                 {
 					Fire ();
 

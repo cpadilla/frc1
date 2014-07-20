@@ -6,13 +6,13 @@ public class Player : Unit
 	public static Player Instance;
         public static GameObject MainPlayer;
 
-      public float r_speed = 1000.0f;
-
-           public GameObject weapon;
-      public bool moving = false;
+        public int Score;
+        public float r_speed = 1000.0f;
+            public GameObject weapon;
+        public bool moving = false;
 		
-public float v_Input = 0f;
-      public float h_Input = 0f;
+        public float v_Input = 0f;
+        public float h_Input = 0f;
 
 
 	//oe
@@ -54,6 +54,7 @@ public float v_Input = 0f;
 	// Update is called once per frame
 	void Update()
 	{
+            Score = m_score;
 		// Store the input from the player
 	    v_Input = Input.GetAxis("Vertical");
 	    h_Input = -Input.GetAxis("Horizontal");
@@ -83,7 +84,7 @@ public float v_Input = 0f;
 		print (other.name);
 		switch (other.name) {
 			case "EnemyShip":
-				Destroy(other.gameObject);
+				//Destroy(other.gameObject);
 			break;
 			case "Laser":
 
@@ -114,7 +115,6 @@ public float v_Input = 0f;
 
 	void OnGUI()
 	{
-	
 		//width,height,Screen.width-width,height+10
 
 		GUI.Label(m_scoreRect,m_score.ToString(),scoreStyle);
@@ -122,6 +122,16 @@ public float v_Input = 0f;
 		if(m_health<=0)
 			GUI.Label(new Rect(0,0,30,30),"YOU LOSE",scoreStyle);
 	}
+
+    public override void Hit()
+    {
+        m_health-=1;
+        if (m_health<=0)
+        {
+            //Destroy(gameObject);
+            Player.m_score = -99999;
+        }
+    }
 }
 
 

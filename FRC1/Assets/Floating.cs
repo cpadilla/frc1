@@ -20,7 +20,7 @@ public class Floating : MonoBehaviour {
 		if(unit)
 			unit.Hit();
 
-		if(trig.gameObject.tag == "Player")
-			Destroy (gameObject);
+        //if(trig.gameObject.tag == "Player")
+        //    Destroy (gameObject);
 	}
 }
