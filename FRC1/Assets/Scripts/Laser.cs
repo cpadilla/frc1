@@ -42,4 +42,4 @@ public class Laser :Unit {
 
 //Laser
 //rapidfire
-//burst
+//bu

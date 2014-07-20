@@ -39,6 +39,15 @@ public class Enemy : Unit {
         {
         }
 
+	void OnTriggerEnter(Collider other)
+	{
+		Unit player= (Unit)other.GetComponent<Unit>();
+
+		if(player && player.tag=="Player")
+			player.Hit();
+
+		Hit();
+	}
 	float GetDistance()
 	{
             try
