@@ -151,4 +151,9 @@ public class Enemy : Unit {
 		GameObject bullet = (GameObject)Instantiate (prefabBullet, transform.position + transform.forward * 5, transform.rotation);
 		//bullet.GetComponent<Laser>().
 	}
+
+	void OnDestroy()
+	{
+		EnemySpawner.getInstance ().RemoveEnemy (m_typeIndex, gameObject);
+	}
 }
