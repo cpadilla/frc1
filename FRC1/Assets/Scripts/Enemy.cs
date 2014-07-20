@@ -45,47 +45,21 @@ public class Enemy : Unit {
 	
 	void OnTriggerEnter(Collider other)
 	{
-
 		Unit player= (Unit)other.GetComponent<Unit>();
-
-		//if(player && player.tag=="Player")
-		//	player.Hit();
-
-                if(other.tag == "PlayerBullet")
-                {
-                    
-                    //throw new System.Exception();
-                }
-
-
-	}
 	
-    //void OnTriggerEnter(Collision other)
-    //{
-
-    //            if(other.gameObject.tag == "PlayerBullet")
-    //            {
-    //                Player.m_score += m_score;
-    //                throw new System.Exception();
-    //            }
-    //    Hit();
-    //}
-
-
+		if(other.tag == "PlayerBullet")
+		{
+		    
+		    //throw new System.Exception();
+		}
+	}
 
 	float GetDistance()
 	{
-	    try
-	    {
-	        target = player.transform;
-	        float val = Mathf.Abs (Vector3.Distance (transform.position, target.position)); 
-	        //print (val);
-	        return val;
-	    }
-	    catch (System.Exception)
-	    {
-	        return 0.0f;
-	    }
+		target = player.transform;
+	    float val = Mathf.Abs (Vector3.Distance (transform.position, target.position)); 
+
+		return val;
 	}
 
 	IEnumerator CR_SEARCH()
@@ -129,39 +103,24 @@ public class Enemy : Unit {
 		
 		ChangeState (STATE_SEARCH);
 	}
-
-        //void Update()
-        //{
-        //switch (m_state) {
-        //    case STATE_SEARCH:
-        //        //StartCoroutine("CR_SEARCH");
-        //                        CR_SEARCH();
-        //    break;
-
-        //    case STATE_ATTACK:
-        //        //StartCoroutine("CR_ATTACK");
-        //                        CR_ATTACK();
-        //    break;
-        //}
-        //}
-
+	
 	public void ChangeState(int NEW_STATE)
 	{
 		m_state = NEW_STATE;
-            print("New State " + m_state.ToString());
-            switch (m_state)
-            {
-                case STATE_SEARCH:
-                    StartCoroutine("CR_SEARCH");
-                    break;
+	    print("New State " + m_state.ToString());
+	    switch (m_state)
+	    {
+	        case STATE_SEARCH:
+	            StartCoroutine("CR_SEARCH");
+	            break;
 
-                case STATE_ATTACK:
-                    StartCoroutine("CR_ATTACK");
-                    break;
-                case STATE_DESTROYED:
-                    StopAllCoroutines();
-                    break;
-            }
+	        case STATE_ATTACK:
+	            StartCoroutine("CR_ATTACK");
+	            break;
+	        case STATE_DESTROYED:
+	            StopAllCoroutines();
+	            break;
+	    }
 	}
 
 	void OnGUI()
@@ -171,7 +130,6 @@ public class Enemy : Unit {
 
 	void MoveToTarget()
 	{
-		//print ("gogogo");
 		Vector3 targetDir = target.position - transform.position;
 		float step = rotate_rate * Time.deltaTime;
 		Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
@@ -188,9 +146,7 @@ public class Enemy : Unit {
 		isReadyToFire = false;
 		StartCoroutine (CR_FireCooldown ());
 
-		//print ("shoot");
 		//instantiate bullet code
-
 		GameObject bullet = (GameObject)Instantiate (prefabBullet, transform.position + transform.forward * 5, transform.rotation);
 		//bullet.GetComponent<Laser>().
 	}
@@ -202,7 +158,5 @@ public class Enemy : Unit {
 		Instantiate(enemyDead, this.transform.position, this.transform.rotation);
 		enemyDead.Play();
 		Player.m_score+=m_score;
-
-
 	}
 }
