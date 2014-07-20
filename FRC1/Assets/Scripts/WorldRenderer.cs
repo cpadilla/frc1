@@ -28,9 +28,29 @@ public class WorldRenderer : MonoBehaviour {
         // Prefab Offsets
         private float largePlanetOffset = 100.0f;
 
+        private static WorldRenderer _instance;
+        private static bool _set = false;
+
+        public static WorldRenderer Instance
+        {
+            get
+            {
+                return _instance;
+            }
+            set
+            {
+                if (!_set)
+                {
+                    _instance = value;
+                    _set = true;
+                }
+            }
+        }
+
 	// Use this for initialization
 	void Start () {
             //for (int i = 0; i < initObjectCount; i++) SpawnObjects();
+            Instance = this;
 	}
 	
 	// Update is called once per frame
@@ -76,7 +96,17 @@ public class WorldRenderer : MonoBehaviour {
 
         GameObject getNextSpawnObject()
         {
-            GameObject obj = (GameObject)Instantiate(prefabs[Random.Range(0, prefabs.Count)], player.transform.position, transform.rotation);
+			
+            //if(obj)
+            GameObject obj = null;
+            while (obj == null)
+            {
+                try
+                {
+                    obj = (GameObject)Instantiate(prefabs[Random.Range(0, prefabs.Count)], player.transform.position, transform.rotation);
+                }
+                catch { }
+            }
             // get random position for object
             float xrandomOffset = getRandomOffset(renderRadius, minSpawnDistance);
             float yrandomOffset = getRandomOffset(renderRadius, minSpawnDistance);
@@ -90,5 +120,13 @@ public class WorldRenderer : MonoBehaviour {
             }
 
             return obj;
+        }
+
+        public bool Delete(GameObject obj)
+        {
+            bool del = false;
+            del = foregroundObjects.Remove(obj);
+            Destroy(obj);
+            return del;
         }
 }

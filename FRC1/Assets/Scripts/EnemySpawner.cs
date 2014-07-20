@@ -21,12 +21,12 @@ public class EnemySpawner : MonoBehaviour {
 
 	//Singleton
 	static EnemySpawner instance;
-	public EnemySpawner getInstance()
+	public static EnemySpawner getInstance()
 	{
-		if (instance == null)
-			instance = this;
-		else
-			Destroy (gameObject);
+		//if (instance == null)
+		//	instance = this;
+		//else
+		//	Destroy (gameObject);
 
 		return instance;
 	}
@@ -34,6 +34,12 @@ public class EnemySpawner : MonoBehaviour {
 	//Methods
 	void Start()
 	{
+		if (instance != null) {
+			Destroy(gameObject);
+			return;
+		}
+
+		instance = this;
 		lEnemyOne = new List<GameObject> ( maxEnemyOne );
 		lEnemyTwo = new List<GameObject> ( maxEnemyTwo );
 		player = GameObject.Find ("Player").transform;

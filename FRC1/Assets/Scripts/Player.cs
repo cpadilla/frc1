@@ -6,7 +6,7 @@ public class Player : Unit
 	public static Player Instance;
         public static GameObject MainPlayer;
 
-      public float r_speed = 50.0f;
+      public float r_speed = 1000.0f;
 
            public GameObject weapon;
       public bool moving = false;
@@ -34,7 +34,7 @@ public float v_Input = 0f;
 	{
 
 		//Variables
-		m_speed = 10.0f;
+		m_speed = 1000.0f;
 
 		//Health
 		m_health = 3.0f;
