@@ -11,7 +11,7 @@ public class Laser :Unit {
 	// Use this for initialization
 	void Start () {
 		gameObject.name = "Laser";
-		transform.parent = GameObject.Find ("LaserContainer").transform;
+		//transform.parent = GameObject.Find ("LaserContainer").transform;
 		Destroy( gameObject, m_lifeTime);
 
 
