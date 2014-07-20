@@ -16,7 +16,7 @@ public class Player : Unit
 	public Rect m_scoreRect;
 
         public float r_speed = 1000.0f;
-        public float m_velocity = 0.0f;
+        //public float m_velocity = 0.0f;
         public float m_drag = -1.0f;        public float v_Input = 0f;        public float h_Input = 0f;            public bool moving = false;
 
 

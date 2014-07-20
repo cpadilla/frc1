@@ -17,6 +17,7 @@ public class Enemy : Unit {
 	public float m_rof = .5f; 				//rate of fire
 	public float m_range = 5f;
 	public float rotate_rate = 20;
+	public float rangeFromPlayer = 10; 
 
 	bool isReadyToFire = true;
 
@@ -49,7 +50,6 @@ public class Enemy : Unit {
 	
 		if(other.tag == "PlayerBullet")
 		{
-		    
 		    //throw new System.Exception();
 		}
 	}
@@ -75,7 +75,6 @@ public class Enemy : Unit {
 	{
 		yield return new WaitForSeconds (m_rof);
 		isReadyToFire = true;
-
 	}
 
 	IEnumerator CR_ATTACK()
@@ -91,16 +90,14 @@ public class Enemy : Unit {
 					Attack();					//attack
 				}
 
-
-				MoveToTarget();				//move closer
+				if(distance > rangeFromPlayer)
+					MoveToTarget();				//move closer
 			}
 			else 		//outside of sight range, go to Search State
 				break;
 
 			yield return 0;
 		}
-
-		
 		ChangeState (STATE_SEARCH);
 	}
 	
@@ -150,13 +147,16 @@ public class Enemy : Unit {
 		GameObject bullet = (GameObject)Instantiate (prefabBullet, transform.position + transform.forward * 5, transform.rotation);
 		//bullet.GetComponent<Laser>().
 	}
+	private bool isQuitting = false; void OnApplicationQuit() { isQuitting = true; }
 
 	void OnDestroy()
 	{
 		//EnemySpawner.getInstance ().RemoveEnemy (m_typeIndex, gameObject);
 		Player play= player.GetComponent<Player>();
-		Instantiate(enemyDead, this.transform.position, this.transform.rotation);
-		enemyDead.Play();
+		if (!isQuitting) {
+						Instantiate (enemyDead, this.transform.position, this.transform.rotation);
+						enemyDead.Play ();
+				}
 		Player.m_score+=m_score;
 	}
 }
