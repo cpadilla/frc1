@@ -2,7 +2,9 @@ fileFormatVersion: 2
 guid: 5e42f2e5351ca4c5fbb7241ab61fe2b4
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - prefabBullet: {instanceID: 0}
+  - enemyDead: {fileID: 19800000, guid: 6084e5219a5f9bd44b979f36bce7f8bb, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

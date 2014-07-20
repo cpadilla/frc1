@@ -24,7 +24,7 @@ public class Enemy : Unit {
 	public int m_score;
 
 	public static Transform target;
-
+	public ParticleSystem enemyDead;
 	void Awake()
 	{
 		m_health = 1;
@@ -199,7 +199,8 @@ public class Enemy : Unit {
 	{
 		//EnemySpawner.getInstance ().RemoveEnemy (m_typeIndex, gameObject);
 		Player play= player.GetComponent<Player>();
-
+		Instantiate(enemyDead, this.transform.position, this.transform.rotation);
+		enemyDead.Play();
 		Player.m_score+=m_score;
 
 
